@@ -244,11 +244,15 @@
 % Do wyboru: styl numeracyjny wg normy PN (?)
 % ALBO styl harwardzki
 % -------------------------------------------------------------------
-\RequirePackage[backend=biber,
-        style=ieee,     % styl numeryczny IEEE prawie jak PN
-        sorting=nyt,    % sortowanie spisu po nazwiskach
-        citestyle=numeric-comp % kompaktowe odnośniki numeryczne typu [21-23]
-    ]{biblatex}
+\RequirePackage[
+    backend=biber,
+    natbib=true,
+    sorting=none,
+    citestyle=ieee,
+    giveninits=true,
+    doi=false,
+    isbn=true
+]{biblatex}
 \addbibresource{EE-dyplom.bib}
 \DeclareNameAlias{default}{family-given} % nazwisko na początku
 \newcommand{\bibliografia}{
@@ -855,4 +859,33 @@
     \listoftables
 
     \easyappendices
+}
+%%%%%%%%%%%%
+% Listingi %
+%%%%%%%%%%%%
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{gray},
+  keywordstyle=\color{blue},
+  frame=single,
+  captionpos=b,
+  literate={ą}{{\k a}}1
+  		    {Ą}{{\k A}}1
+           {ż}{{\. z}}1
+           {Ż}{{\. Z}}1
+           {ź}{{\' z}}1
+           {Ź}{{\' Z}}1
+           {ć}{{\' c}}1
+           {Ć}{{\' C}}1
+           {ę}{{\k e}}1
+           {Ę}{{\k E}}1
+           {ó}{{\' o}}1
+           {Ó}{{\' O}}1
+           {ń}{{\' n}}1
+           {Ń}{{\' N}}1
+           {ś}{{\' s}}1
+           {Ś}{{\' S}}1
+           {ł}{{\l}}1
+           {Ł}{{\L}}1
 }
