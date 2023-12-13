@@ -1,15 +1,24 @@
+\newpage
 \section{Metryki Statyczne}
-Metryki statyczne to najprostszy rodzaj metryk, skupiający się na statycznej analizie
-kodu źródłowego.
+Pierwszym rodzajem omawianych metryk są metryki statyczne. Spośród omawianych w tej pracy metryk wyróżniają się tym,
+że jako jedyne nie skupiają się na mierzeniu parametrów pracy zespołu, tylko kodu.
+Część z nich jest w dzisiejszych czasach zintegrowana w narzędziach deweloperskich, takich jak \href{https://www.synopsys.com/software-integrity/static-analysis-tools-sast/coverity.html}{Coverity}
+lub \href{https://www.sonarsource.com/products/sonarlint/}{SonarLint}.
 
-\subsection*{Liczba linii kodu (LOC)}
-Najprostszą metryką statyczną jest liczba linii kodu (LOC).
-Oczywiście jest to niezbyt miarodajna metryka -- w obrębie pojedynczego języka można napisać
-każdą funkcjonalność na wiele różnych sposobów, między różnymi językami będzie się to wahać jeszcze bardziej.
-Co więcej -- może się to wahać nawet pomiędzy różnymi wersjami tego samego języka, np. \cite[\texttt{switch} w Javie 17]{jdk17switch},
-zapewniający bardziej zwięzłą składnię niż we wcześniejszych wersjach. \\
-Poza samym faktem tego, że to samo może mieć różną objętość pod kątem LOC, nie da się równiez jednoznacznie stwierdzić,
-czy mniej linii kodu jest zawsze lepsze niż więcej, czy vice versa.
+\subsection{Liczba linii kodu (LOC)}
+Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code -- LOC).
+Jest to dobra metryka do orientacyjnej oceny rozmiaru projektu czy danej funkcjonalności, jednak nie nadaje
+się do dokładniejszych analiz, ze względu na fundamentalne wady:
 
-\subsection*{Metryki Halsteada}
-\cite[dupa]{halstead}
+\subsubsection*{Istnieje wiele rozwiązań każdego problemu}
+Jako przykład rozpatrzmy proste zadanie -- odwrócenie ciągu znaków w języku Java. \\
+\lstinputlisting[caption=Początkujący programista zapewne podszedłby do problemu nieco bardziej imperatywnie]{ReverseStringImperative.java}
+\lstinputlisting[caption=Bardziej doświadczony programista skorzystałby ze znajomości biblioteki standardowej]{ReverseStringSb.java}
+\lstinputlisting[caption=Entuzjasta programowania funkcyjnego mógłby skorzystać ze Stream API]{ReverseStringStream.java}
+
+\subsubsection*{Różne języki programowania mogą zasadniczo różnić się składnią}
+Przykładowo, w języku Python nie potrzeba nawet pisać funkcji do odwrócenia
+ciągu znaków, wystarczy wykorzystać wbudowany operator indeksowania z odpowiednimi parametrami: \texttt{[::-1]}
+
+\subsection{Złożoność cyklomatyczna}
+W 1976 Thomas J. McCabe opracował metrykę złożoności kodu, opartą na grafowej reprezentacji przepływu sterowania programu\cite[]{McCabe1976ACM}.

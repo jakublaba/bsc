@@ -1,1 +1,30 @@
 \section{Inne stare metryki}
+
+\subsection{Metryki Halsteada}
+W 1977 prof Maurice Howard Halstead z Purdue University, sformułował metryki mające opisywać kod w dokładny sposób\cite[]{halstead1977elements}.
+Metryki prof Halsteada opierają się o 4 wartości:
+\begin{itemize}
+    \item $\eta_1$ -- liczba unikalnych operatorów
+    \item $\eta_2$ -- liczba unikalnych operandów
+    \item $N_1$ -- całkowita liczba operatorów
+    \item $N_2$ -- całkowita liczba operandów
+\end{itemize}
+Na ich podstawie można obliczyć następujące parametry:
+\begin{itemize}
+    \item Słownictwo: $\eta = \eta_1 + \eta_2$
+    \item Długość: $N = N_1 + N_2$
+    \item Szacunkowa długość: $\hat{N} = \eta_1log_2\eta_1 + \eta_2log_2\eta_2$
+    \item Objętość: $V = N \times log_2\eta$
+    \item Trudność: $D = \frac{\eta_1}{2} \times \frac{N_2}{\eta_2}$
+    \item Wysiłek: $E = D \times V$
+    \item Czas: $T = \frac{E}{18}[s]$
+    \item Bugi: $B = \frac{E^{\frac{2}{3}}}{3000}$ później uproszczone do $B = \frac{V}{3000}$
+\end{itemize}
+Metryki te nie przyjęły się, ze względu na ich właściwości:
+\begin{enumerate}
+    \item Objętość programu jest liniowo zależna od długości
+    \item Wysiłek jest liniowo zależny od objętości
+    \item Czas jest liniowo zależny od wysiłku
+\end{enumerate}
+Łańcuch tych zależności sprowadza się do tego, że każda z tych metryk jest u podstaw liniowo zależna od długości, która pod kątem przydatności niewiele różni się od liczby linii kodu. \\
+Zebranie odpowiednich parametrów kodu i obliczenie tych metryk jest zatem inwestycją czasu, która w porównaniu z LOC jest nieopłacalna.
