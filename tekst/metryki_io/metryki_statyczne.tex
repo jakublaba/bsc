@@ -10,15 +10,55 @@ Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code -- L
 Jest to dobra metryka do orientacyjnej oceny rozmiaru projektu czy danej funkcjonalności, jednak nie nadaje
 się do dokładniejszych analiz, ze względu na fundamentalne wady:
 
-\subsubsection*{Istnieje wiele rozwiązań każdego problemu}
-Jako przykład rozpatrzmy proste zadanie -- odwrócenie ciągu znaków w języku Java. \\
-\lstinputlisting[caption=Początkujący programista zapewne podszedłby do problemu nieco bardziej imperatywnie]{ReverseStringImperative.java}
-\lstinputlisting[caption=Bardziej doświadczony programista skorzystałby ze znajomości biblioteki standardowej]{ReverseStringSb.java}
-\lstinputlisting[caption=Entuzjasta programowania funkcyjnego mógłby skorzystać ze Stream API]{ReverseStringStream.java}
+\subsubsection*{Mniej linii nie zawsze oznacza lepszy kod}
+Jako przykład można przyjrzeć się tzw. \textit{fluent API}, czyli interfejsom zaprojektowanym z myślą o łańcuchowym wywoływaniu metod.
+Przykładem takich interfejsów są np. Stream API (Java), AssertJ (Java), JooQ (Java), LINQ (C\#).
+Przy korzystaniu z tego typu interfejsów, wywoływanie kolejnych metod w pojedynczej linii jest bardzo nieczytelne, zalecane jest
+umieszczanie każdego wywołania metody w nowej linii:
+\begin{lstlisting}[caption=Sumowanie liczb pierwszych przy użyciu Stream API (Java)]
+var primesSum = IntStream.range(1, 1_000)
+    .filter(SomeLibrary::isPrime)
+    .sum();
+\end{lstlisting}
 
-\subsubsection*{Różne języki programowania mogą zasadniczo różnić się składnią}
-Przykładowo, w języku Python nie potrzeba nawet pisać funkcji do odwrócenia
-ciągu znaków, wystarczy wykorzystać wbudowany operator indeksowania z odpowiednimi parametrami: \texttt{[::-1]}
+\subsubsection*{Różnice składni i stylu kodu}
+Niektóre języki mają po prostu bardziej zwięzłą składnię niż inne.
+Przykładowo, JavaScript i Kotlin posiadają operator \texttt{?}, pozwalający pisać w 1 linii kod, który w Javie zająłby 4:
+\begin{lstlisting}[caption=Przykład obsługi null (Kotlin)]
+var obj = a?.field;
+\end{lstlisting}
+\begin{lstlisting}[caption=Przykład obsługi null (Java)]
+var obj = null;
+if (a != null) {
+    obj = a.field;
+}
+\end{lstlisting}
 
-\subsection{Złożoność cyklomatyczna}
-W 1976 Thomas J. McCabe opracował metrykę złożoności kodu, opartą na grafowej reprezentacji przepływu sterowania programu\cite[]{McCabe1976ACM}.
+\subsection{Metryki Halsteada}
+W 1977 prof Maurice Howard Halstead z Purdue University, sformułował metryki mające opisywać kod w dokładny sposób.\cite[]{halstead1977elements}
+Metryki prof Halsteada opierają się o 4 wartości:
+\begin{itemize}
+    \item $\eta_1$ -- liczba unikalnych operatorów
+    \item $\eta_2$ -- liczba unikalnych operandów
+    \item $N_1$ -- całkowita liczba operatorów
+    \item $N_2$ -- całkowita liczba operandów
+\end{itemize}
+Na ich podstawie można obliczyć następujące parametry:
+\begin{itemize}
+    \item Słownictwo: $\eta = \eta_1 + \eta_2$
+    \item Długość: $N = N_1 + N_2$
+    \item Szacunkowa długość: $\hat{N} = \eta_1log_2\eta_1 + \eta_2log_2\eta_2$
+    \item Objętość: $V = N \times log_2\eta$
+    \item Trudność: $D = \frac{\eta_1}{2} \times \frac{N_2}{\eta_2}$
+    \item Wysiłek: $E = D \times V$
+    \item Czas: $T = \frac{E}{18}[s]$
+    \item Bugi: $B = \frac{E^{\frac{2}{3}}}{3000}$ Później uproszczone do $B = \frac{V}{3000}$
+\end{itemize}
+Metryki te nie przyjęły się, ze względu na ich właściwości:
+\begin{enumerate}
+    \item Objętość programu jest liniowo zależna od długości
+    \item Wysiłek jest liniowo zależny od objętości
+    \item Czas jest liniowo zależny od wysiłku
+\end{enumerate}
+Łańcuch tych zależności sprowadza się do tego, że każda z tych metryk jest u podstaw liniowo zależna od długości, która pod kątem przydatności niewiele różni się od liczby linii kodu. \\
+Zebranie odpowiednich parametrów kodu i obliczenie tych metryk jest zatem inwestycją czasu, która w porównaniu z LOC jest nieopłacalna.
