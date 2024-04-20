@@ -1,1 +1,34 @@
-\section{Metryki w metodyce SCRUM}
+\section{Metryki w metodyce Scrum}
+Chociaż oficjalny Scrum Guide \cite[]{Schwaber2012TheSG} nie definiuje bezpośrednio metryk, powszechnie przyjęło się korzystanie z \textit{Velocity} oraz wykresów wypalenia.
+
+\subsection{Czym są Story Points?}
+Mimo że Scrum jest nieco starszy niż Extreme Programming, koncepcja Story Points została zaczerpnięta właśnie z XP.
+Na swoim blogu \cite[]{StoryPointsRevisited} jeden z autorów tej metodyki opisuje że początkowo estymaty ustalało się po prostu w liczbie dni.
+Nie była to jednak najbardziej precyzyjna jednostka do estymacji, a więc szybko został zaadaptowany koncept tzw. \textit{Dni Idealnych}.
+Ron Jeffries opisuje dni idealne następującymi słowami: \textit{"We quickly went to what we called “Ideal Days”, which was informally described as how long it would take a pair to do it if the bastards would just leave you alone."}.
+Kolokwialnie mówiąc, dni idealne to dni w których programiści mieliby święty spokój.
+Aby z liczby dni idealnych uzyskać estymatę faktycznego czasu, były one mnożone przez współczynnik obciążenia.
+Nazwa "dni idealne" często była skracana do "dni", co prowadziło do nieporozumień z klientami, stąd zaczęto nazywać je po prostu "punktami". \\
+Obecnie Story Points funkcjonują jako relatywna jednostka, nie mająca bezpośredniego przełożenia na czas wykonania, a używana jedynie do oceny ilości pracy.
+
+\subsection{Velocity}
+Velocity jest bardzo prostą metryką, polegającą jedynie na zsumowaniu wagi zadań w danym sprincie, dając wgląd w wydajność zespołu.
+Metryka ta niestety jest bardzo podatna na niepoprawne estymowanie zadań -- świadomie bądź nie, co może prowadzić do fałszywej oceny postępów w przypadku
+zespołów które jeszcze się nie "skalibrowały" i niedoestymowują zadań, oraz zespołów które celowo je przeestymowują aby wypaść lepiej na papierze.
+
+\subsection{Wykres wypalenia}
+Błędnie nazywany metryką, ponieważ jest to jedynie wizualizacja postępu projektu.
+Oś Y reprezentuje skumulowaną wagę pozostałych zadań, natomiast oś X czas.
+Na wykresie wypalenia można zidentyfikować czy zespół nadąża z wykonywaniem zadań.
+W dobrze przebiegającym projekcie powinien być obserwowalny trend spadkowy, moment kiedy wartość na osi Y spadnie do 0 jest momentem wykonania wszystkich zadań na zadany okres.
+
+\subsection{Inne Metryki}
+Jako że metryki nie są oficjalnie zdefiniowane, zależą one tak naprawdę od organizacji.
+Firmy zajmujące się wspieraniem produkcji oprogramowania (np. \href{https://www.atlassian.com/}{Atlassian}, \href{https://www.sealights.io/}{Sealights}), wymieniają tutaj m.in. \cite[]{ScrumMetricsSealights} \cite[]{ScrumMetricsAtlassian}:
+\begin{itemize}
+    \item Sprint Goal Success
+    \item Defect Density
+    \item Time to Market
+    \item ROI (Return of Investment)
+\end{itemize}
+Z powodu tego, że te metryki nie są mierzalne z samych parametrów zadań na platformie, nie są one istotne dla tej pracy.
