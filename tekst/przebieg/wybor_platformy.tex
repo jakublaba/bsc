@@ -1,0 +1,24 @@
+\section{Wybór platformy}
+W ramach wstępnych badań do pracy zostały porównane funkcjonalności platform:
+\begin{itemize}
+    \item \href{https://www.atlassian.com/software/jira}{Jira}
+    \item \href{https://www.jetbrains.com/youtrack/}{YouTrack}
+\end{itemize}
+Początkowym pomysłem na realizację projektu było użycie rest api udostępnianego przez obie z platform.
+
+\subsubsection*{Słownik pojęć}
+\begin{itemize}
+    \item id projektu -- wewnętrzny identyfikator przydzielany projektom przy utworzeniu
+    \item klucz projektu -- akronim nazwy projektu lub nazwa projektu skrócona do kilku liter
+    \item id zadania -- wewnętrzny identyfikator przydzielany zadaniom przy utworzeniu
+    \item klucz zadania -- identyfikator zadań bardziej czytelny dla człowieka, numer zadania w kolejności chronologicznej, prefiksowany kluczem projektu.
+    Przykładowo, projekt o kluczu \texttt{AG} będzie posiadał zadania o kluczach \texttt{AG-1, AG-2}, itd.
+\end{itemize}
+
+\subsection*{YouTrack}
+\subsubsection*{Autoryzacja}
+YouTrack korzysta w swoim rest api z autoryzacji typu \texttt{Bearer Token}.
+Należy wygenerować go na swoim profilu: \texttt{Profile -> Account Security -> New Token}.
+\subsection*{API}
+
+\subsection*{Jira}
