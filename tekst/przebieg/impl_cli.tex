@@ -1,0 +1,46 @@
+\section{Implementacji CLI}
+Biblioteka \href{https://docs.rs/clap/latest/clap/}{clap} pozwala na prostą implementację interfejsów typu CLI.
+Clap wykorzystuje system makr w Ruście, dzięki czemu wystarczy zdefiniować \texttt{struct} z polami reprezentującymi
+dostępne argumenty interfejsu wiersza poleceń, a następnie nałożyć na niego makro \texttt{\#[derive(Parser)]}, uzupełniając niektóre
+argumenty posiadające bardziej skomplikowane implementacje własnymi implementacjami parsowania.\\
+Na przykładzie tego programu, takie argumenty jak autor czy ilość zadań nie potrzebują dodatkowych implementacji, ponieważ są podstawowymi typami języka.
+Jednak takie argumenty jak daty w niestandardowym formacie \texttt{dd-mm-YY} czy typ \texttt{User} wczytywany z pliku wymagają
+samodzielnej implementacji.\\
+Ponadto, biblioteka potrafi wykryć format komentarzy dokumentujących kod i automatycznie dodać do programu flagę \texttt{--help}, renderującą instrukcję
+w postaci tej dokumentacji.\\
+
+\begin{lstlisting}[caption=Instrukcja użycia CLI programu]
+PS > agilemaster --help
+Usage: agilemaster.exe --name <NAME> --author <PATH> --start <DATE> --end <DATE> --issue-amount <AMOUNT>
+
+Options:
+    -n, --name <NAME>            Name of the generated project
+    -a, --author <PATH>          Fully qualified name (with path) of json file with user data
+    -s, --start <DATE>           Start date of the project (dd-mm-YYYY)
+    -e, --end <DATE>             End date of the project (dd-mm-YYYY)
+    -i, --issue-amount <AMOUNT>  Amount of issues to generate
+    -h, --help                   Print help
+    -V, --version                Print version
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Przykład użycia programu]
+PS > agilemaster `
+>> --name test `
+>> --author user.json `
+>> --start 1-2-2024 `
+>> --end 31-3-2024 `
+>> --issue-amount 70
+[src\main.rs:15:5] &args = Cli {
+    name: "test",
+    author: User {
+        name: "sample_user",
+        groups: [],
+        active: true,
+        email: "user@example.com",
+        full_name: "John Smith",
+    },
+    start: 2024-02-01T00:00:00Z,
+    end: 2024-03-31T00:00:00Z,
+    issue_amount: 70,
+}
+\end{lstlisting}

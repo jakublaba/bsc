@@ -4,7 +4,7 @@ W ramach wstępnych badań do pracy zostały porównane funkcjonalności platfor
     \item \href{https://www.atlassian.com/software/jira}{Jira}
     \item \href{https://www.jetbrains.com/youtrack/}{YouTrack}
 \end{itemize}
-Początkowym pomysłem na realizację projektu było użycie rest api udostępnianego przez obie z platform.
+Początkowym pomysłem na realizację projektu było użycie rest api udostępnianego przez obie z platform. \cite[]{JiraApiDocumentation} \cite[]{YouTrackApiDocumentation}
 
 \subsubsection*{Słownik pojęć}
 \begin{itemize}
@@ -15,10 +15,181 @@ Początkowym pomysłem na realizację projektu było użycie rest api udostępni
     Przykładowo, projekt o kluczu \texttt{AG} będzie posiadał zadania o kluczach \texttt{AG-1, AG-2}, itd.
 \end{itemize}
 
+\subsection*{Jira}
+\subsubsection*{Autoryzacja}
+Jira korzysta w swoim rest api z autoryzacji typu \texttt{Basic Auth}, z emailem użytkownika jako loginem i tokenem dostępowym w roli hasła.
+Token należy wygenerować na swoim profilu: \texttt{Profile -> Manage your account -> Security -> Create and manage API tokens}.
+\subsubsection*{API -- podgląd zadań}
+Należy wykonać zapytanie \texttt{GET} na adres \texttt{https://[instancja jiry]/rest/api/2/issues/[id/key]}
+Odpowiedź zawiera kompletny zestaw danych.
+\begin{lstlisting}[caption=Wybrane dane z zapytania o pojedyncze zadanie (Jira)]
+{
+    //...
+    "id": "10034",
+    "self": "https://jakublaba.atlassian.net/rest/api/2/issue/10034",
+    "key": "AG-35",
+    "fields": {
+        "statuscategorychangedate": "2023-05-25T18:04:12.315+0200",
+        "issuetype": {
+            "self": "https://jakublaba.atlassian.net/rest/api/2/issuetype/10003",
+            "id": "10003",
+            "description": "A problem or error.",
+            "iconUrl": "https://jakublaba.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+            "name": "Bug",
+            //...
+        },
+        //...
+        "project": {
+            "self": "https://jakublaba.atlassian.net/rest/api/2/project/10000",
+            "id": "10000",
+            "key": "AG",
+            "name": "agilemaster",
+            "projectTypeKey": "software",
+            //...
+        },
+        // ...
+        "created": "2023-05-25T18:04:12.060+0200",
+        // ...
+        "updated": "2023-05-25T18:04:12.219+0200",
+        "status": {
+            "self": "https://jakublaba.atlassian.net/rest/api/2/status/10000",
+            "description": "",
+            "iconUrl": "https://jakublaba.atlassian.net/",
+            "name": "To Do",
+            "id": "10000",
+            "statusCategory": {
+                "self": "https://jakublaba.atlassian.net/rest/api/2/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+            }
+        },
+        //...
+    }
+}
+\end{lstlisting}
+\subsubsection*{API -- tworzenie zadań}
+Aby utworzyć zadanie należy wykonać zapytanie \texttt{POST} na adres \texttt{https://[instancja jiry]/rest/api/2/issues}.
+\begin{lstlisting}[caption=Przykładowe zapytanie do stworzenia zadania (Jira)]
+{
+    "fields": {
+        "project": {
+            "key": "AG"
+        },
+        "summary": "Nazwa zadania",
+        "description": "Opis zadania",
+        "issuetype":  {
+            "name": "Epic"
+        }
+    }
+}
+\end{lstlisting}
+
+Jak można zaobserwować z odpowiedzi na zapytanie o dane zadania, istnieje pole \texttt{created} zawierające datę utworzenia zadania.
+Dokumentacja nie opisuje możliwości ustawienia tego parametru, jednak spróbowałem włączyć go do poprzedniego zapytania.
+\begin{lstlisting}[caption=Próba ustawienia daty stworzenia zadania (Jira)]
+    {
+        "fields": {
+            "project": {
+                "key": "AG"
+            },
+            "summary": "Nazwa zadania",
+            "description": "Opis zadania",
+            "issuetype":  {
+                "name": "Epic"
+            }
+        },
+        "created": "2020-12-12T12:30:00.000+0200"
+    }
+\end{lstlisting}
+Skutkuje to odpowiedzią \texttt{400 Bad Request}.
+\begin{lstlisting}[caption=Odpowiedź na próbę ręcznego ustawienia daty utworzenia zadania (Jira)]
+{
+    "errorMessages": [],
+    "errors": {
+        "created": "Field 'created' cannot be set. It is not on the appropriate screen, or unknown."
+    }
+}
+\end{lstlisting}
+Okazało się, że przy każdej operacji serwer nadaje timestamp, i Jira nie udostępnia możliwości nadpisania żadnego z nich.
+
 \subsection*{YouTrack}
 \subsubsection*{Autoryzacja}
 YouTrack korzysta w swoim rest api z autoryzacji typu \texttt{Bearer Token}.
-Należy wygenerować go na swoim profilu: \texttt{Profile -> Account Security -> New Token}.
-\subsection*{API}
+Token należy wygenerować na swoim profilu: \texttt{Profile -> Account Security -> New Token}.
+\subsubsection*{API -- podgląd zadań}
+YouTrack nie pozwala na wykonywanie zapytań z użyciem \textbf{klucza projektu} lub \textbf{kluczy zadań}, stąd trzeba zacząć od zdobycia \textbf{id projektu}.
+Należy w tym celu wykonać zapytanie \texttt{GET} na adres \texttt{https://[instancja youtracka]/api/admin/projects}, umieszczając w nim parametry: \texttt{?fields=id,name}
+\begin{lstlisting}[caption=Zapytanie o id oraz nazwę wszystkich projektów (YouTrack)]
+[
+    {
+        "name": "agilemaster",
+        "id": "0-1",
+        "$type": "Project"
+    }
+]
+\end{lstlisting}
+Już na tym etapie można zaobserwować pewną niewygodę -- w parametrach zapytania trzeba od razu umieścić nazwy pól które chcemy dostać w odpowiedzi.
+Jest to dobre rozwiązanie pod kątem optymalizacji, z takiej koncepcji korzysta np. technologia \href{https://graphql.org/}{GraphQL} aby poprzez przesył jedynie potrzebnych informacji zwiększyć wydajność.
+Takie rozwiązanie zwiększa jednak złożoność implementacji, oraz mocno przywiązuje użytkownika api do dokumentacji -- w przypadku jej niekompletności reverse-engineering jest niemożliwy.\\
+Efekty tego rozwiązania dają się mocno we znaki już przy wykonywaniu prostych zapytań o dane poszczególnych zadań.
+Zapytanie \texttt{GET} na adres \texttt{https://[instancja youtracka]/api/issues/[id]} bez żadnych parametrów nie zwraca praktycznie żadnych danych.
+\begin{lstlisting}[caption=Dane z zapytania o pojedyncze zadanie bez parametrów (YouTrack)]
+{
+    "id": "2-21",
+    "$type": "Issue"
+}
+\end{lstlisting}
+\subsubsection*{API -- tworzenie zadań}
+Aby utworzyć zadanie należy wykonać zapytanie \texttt{POST} na adres \texttt{https://[instancja youtracka]/api/issues}.
+\begin{lstlisting}[caption=Przykładowe zapytanie do stworzenia zadania (YouTrack)]
+{  
+    "summary": "Proof of concept ticket",  
+    "description": "This issue was generated via YouTrack rest api",  
+    "project": {  
+        "id": "0-1"  
+    },  
+    "type": {  
+        "id": "Epic"  
+    }  
+}
+\end{lstlisting}
+Podobnie jak w przypadku Jiry, została podjęta próba ręcznego ustawienia pola \texttt{created}.
+\begin{lstlisting}[caption=Próba ustawienia daty stworzenia zadania (YouTrack)]
+{
+	"summary": "Proof of concept ticket",
+	"description": "This issue was generated via YouTrack rest api",
+	"project": {
+		"id": "0-1"
+	},
+	"type": {
+		"id": "Bug"
+	},
+	"created": 1000
+}
+\end{lstlisting}
+Api zwraca odpowiedź \texttt{200 Ok}, jednak po podejrzeniu danych utworzonego zadania kolejnym zapytaniem,
+możemy zaobserwować że próba ręcznego nadpisania daty została po cichu zignorowana.
+\begin{lstlisting}[caption=Dane zadania z "ustawioną" datą (YouTrack)]
+{
+    "created": 1685149212309,
+    "id": "2-40",
+    "$type": "Issue"
+}
+\end{lstlisting}
 
-\subsection*{Jira}
+\subsection*{Import z innego źródła danych}
+Na żadnej z platform rest api nie udostępniało funkcjonalności potrzebnych do zasymulowania projektu, a więc konieczne
+było znalezienie alternatywy.
+Po dalszej analizie dokumentacji obu platform, okazało się że każda z nich udostępnia import danych ze statycznego źródła danych. \cite[]{JiraImportDocumentation} \cite[]{YouTrackImportDocumentation}
+Pod kątem tego projektu najistotniejsza była funkcjonalność importu z plików.
+W przypadku YouTracka możliwością były formaty \texttt{.csv} oraz \texttt{.xlsx}, Jira umożliwia
+import z formatów \texttt{.csv} oraz \texttt{.json}.
+
+Początkowo wybór padł na format \texttt{.csv} z uwagi na to że jest on wspierany przez obie platformy i potencjalnie
+mogłoby to umożliwić kompatybilność aplikacji z oboma. Po dalszej analizie dokumentacja okazała się jednak niezadowalająca
+pod kątem konfiguracji dat operacji na zadaniach.
+W Jirze jednak pliki \texttt{.json} miały identyczną strukturę do odpowiedzi zwracanych z jej rest api, a więc
+rozległa dokumentacja w tym zakresie mogła być wykorzystana do analizy ich struktury.\\
+Finalną decyzją była platforma Jira oraz generowanie projektów w postaci plików \texttt{.json}.
