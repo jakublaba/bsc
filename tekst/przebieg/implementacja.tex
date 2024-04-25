@@ -1,0 +1,79 @@
+\section{Implementacja}
+Implementacja aplikacji powstała w języku \href{https://www.rust-lang.org/}{Rust}.
+Jest to stosunkowo nowa technologia, pierwsze stabilne wydanie tego języka pojawiło się w maju 2015 roku.
+Główną zaletą Rusta jest koncepcja tzw. \textit{abstrakcji o zerowym koszcie} (nie znalazłem oficjalnego tłumaczenia, ang. \textit{Zero Cost Abstraction}, \textit{Zero Overhead Principle}), która pozwala
+osiągnąć zadowalający kompromis pomiędzy wydajnością a deklaratywnością kodu. Ten termin oznacza optymalizację na poziomie języka, która sprawia że wykorzystane abstrakcje nie będą posiadać dodatkowego kosztu (obliczeniowego czy pamięciowego) w porównaniu
+z optymalną ręczną implementacją takich samych mechanizmów.
+Poza samą strukturą języka, która pozwala nie poświęcać czytelności kodu dla wydajności, dodatkowym czynnikiem wpływającym na tę decyzję była dostępność bibliotek do serializacji/deserializacji danych oraz implementacji interfejsów CLI. \cite{RustSerde} \cite{RustClap}
+
+Poza samą implementacją, dużą częścią projektu był również reverse-engineering z pomocą wspomnianych wcześniej skryptów do eksportu danych z Jiry, napisanych w języku \href{https://www.python.org/}{Python}.
+Wybór tego języka do tego celu był podyktowany przede wszystkim dostępnością biblioteki \href{https://pypi.org/project/jiraone/}{jiraone} oraz prostotą języka, pozwalającą na ich szybkie tworzenie.
+
+Po analizie struktury eksportowanych projektów, możliwe było stworzenie modelu danych.
+Rust nie wspiera dziedziczenia, oferuje alternatywę w postaci makra \texttt{\#[derive]}. Makro to przyjmuje jako parametry
+nazwy interfejsów, następnie szuka ich implementacji na wszystkich polach struktury, i na ich podstawie implementuje je dla struktury jako
+całości.
+Biblioteka do serializacji/deserializacji opiera się w głównej mierze właśnie na tym makrze, w połączeniu z interfejsami \texttt{Serialize} oraz \texttt{Deserialize}.
+Z tego powodu konieczna była własna implementacja serializacji dla dat.
+Jako że Kanbanowe metryki działają z dokładnością do dni, przyjęte zostało uproszczenie polegające na zignorowaniu godziny.
+Pozwala to na uproszczenie interfejsu użytkownika -- konieczne jest podanie jedynie daty w formacie \texttt{dd-mm-YYYY}, a arbitralna
+godzina jest potem doklejana przez program.
+
+Kolejnym wyzwaniem była implementacja generatora dat. Daty musiały być pseudolosowe oraz mieszczące się w konkretnym przedziale czasowym
+podanym przez użytkownika (data rozpoczęcia oraz zakończenia projeku). Ponadto, do generowania historii przejść zadań pomiędzy statusami
+konieczna była funkcjonalność generowania daty po wybranej dacie, nadal mieszczącej się jednak w przedziale.
+Rust umożliwia przeciążanie operatorów, co skutkuje bardzo czytelnym kodem operującym na bardziej złożonych typach.
+Dzięki na datach można w bardzo prosty sposób wykonywać dodawanie i odejmowanie wybranych przedziałów czasowych czy porównywanie.
+Dzięki dokładności metryk jedynie do dni, można przeprowadzić generowanie liczb pseudolosowych w zbiorze liczb całkowitych.
+
+% czy tutaj potrzeba czegoś więcej o generowaniu dat?
+
+Konieczne było stworzenie mechanizmu generowania historii zadań z zachowaniem pewnej logiki w chronologii.
+Projekt nie zakłada cofania zadań do poprzednich statusów, a więc sytuacja w której przejście \texttt{In Progress -> Done} następuje
+wcześniej niż przejście \texttt{To Do -> In Progress} nie ma sensu.
+Projekt nie zakłada również omijania statusów, więc żeby wygenerować zakończone zadanie, nie można wykonać przejścia \texttt{To Do -> Done},
+trzeba zamiast tego wygenerować zestaw przejść prowadzący do tego statusu, zachowując cały czas chronologiczną kolejność w datach
+tych operacji. Właśnie w tym celu potrzebna była funkcjonalność generowania dat po wybranej dacie, ale nadal mieszczącej się w przedziale trwania projektu.
+Do implementacji takiego rozwiązania potrzebna jest również lista przejść w kolejności ich naturalnej progresji.
+Domyślnym zestawem tych danych na Jirze jest \texttt{To Do -> In Progress -> Done}.
+Aby nie nakładać na użytkownika wymogu dodatkowej konfiguracji projektu do importu wygenerowanych danych, w projekcie została zaimplementowana
+jedynie ta lista przejść.
+
+Ostatnim krokiem w implementacji projektu była implementacja interfejsu użytkownika. Sama aplikacja jest na tyle prosta, że GUI wprowadziło by to więcej
+złożoności niż jest to potrzebne, a więc zaimplementowane zostało CLI.
+
+\begin{lstlisting}[caption=CLI programu agilemaster]
+PS C:\Users\Kuba\RustroverProjects> agilemaster --help
+Usage: agilemaster.exe --name <NAME> --author <PATH> --start <DATE> --end <DATE> --issue-amount <AMOUNT>
+
+Options:
+    -n, --name <NAME>            Name of the generated project
+    -a, --author <PATH>          Fully qualified name (with path) of json file with user data
+    -s, --start <DATE>           Start date of the project (dd-mm-YYYY)
+    -e, --end <DATE>             End date of the project (dd-mm-YYYY)
+    -i, --issue-amount <AMOUNT>  Amount of issues to generate
+    -h, --help                   Print help
+    -V, --version                Print version
+\end{lstlisting}
+
+Implementacja flag biorących jako argumenty tekst lub liczby nie była problemem, biblioteka do implementacji CLI również opiera się na makrze
+\texttt{\#[derive]}, w tym przypadku w połączeniu z interfejsem \texttt{Parser}.
+Konieczna była ręczna implementacja parsowania dat, z uwagi na wspomniane wcześniej uproszczenie dla użytkownika zwalniające go z podawania godziny oraz strefy czasowej.
+Kolejną daną niezbędną do wprowadzenia są dane użytkownika widniejącego jako twórca projektu w Jirze.
+Trzeba tutaj podać login, email, listę grup, czy konto jest aktywne oraz pełne imię i nazwisko wprowadzone na profilu platformy.
+Rozbicie tych danych na oddzielne flagi znacznie zmniejszyłoby wygodę korzystania z aplikacji, a więc do podania danych użytkownika konieczne jest stworzenie pliku \texttt{.json}
+o następującej strukturze:
+\begin{lstlisting}[caption=Przykładowy plik z danymi użytkownika]
+{
+    "name": "jakublaba",
+    "groups": [
+        "Administrator",
+        "Member",
+        "Viewer"
+    ],
+    "active": true,
+    "email": "jakub.maciej.laba@gmail.com",
+    "fullname": "Jakub Łaba"
+}
+\end{lstlisting}
+W tym celu należało zaimplementować parser korzystający z zaimplementowanych wcześniej mechanizmów deserializacji dla struktury \texttt{User}.

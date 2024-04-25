@@ -6,15 +6,16 @@ Część z nich jest w dzisiejszych czasach zintegrowana w narzędziach dewelope
 lub \href{https://www.sonarsource.com/products/sonarlint/}{SonarLint}.
 
 \subsection{Liczba linii kodu (LOC)}
-Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code -- LOC).
+Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code -- LOC). Metryka ta skupia się stricte na analizie kodu źródłowego, aby przełożyć
+ją na metrykę mierzącą pracę zespołu, można mierzyć LOC na dany okres.
 Jest to dobra metryka do orientacyjnej oceny rozmiaru projektu czy danej funkcjonalności, jednak nie nadaje
-się do dokładniejszych analiz, ze względu na fundamentalne wady:
+się do dokładniejszych analiz, ze względu na fundamentalne wady.
 
 \subsubsection*{Mniej linii nie zawsze oznacza lepszy kod}
-Jako przykład można przyjrzeć się tzw. \textit{fluent API}, czyli interfejsom zaprojektowanym z myślą o łańcuchowym wywoływaniu metod.
+Jako przykład można przyjrzeć się tzw. \textit{fluent API}, czyli interfejsom programistycznym zaprojektowanym z myślą o łańcuchowym wywoływaniu metod.
 Przykładem takich interfejsów są np. Stream API (Java), AssertJ (Java), JooQ (Java), LINQ (C\#).
 Przy korzystaniu z tego typu interfejsów, wywoływanie kolejnych metod w pojedynczej linii jest bardzo nieczytelne, zalecane jest
-umieszczanie każdego wywołania metody w nowej linii:
+umieszczanie każdego wywołania metody w nowej linii, co wpływa negatywnie na metrykę LOC.
 \begin{lstlisting}[caption=Sumowanie liczb pierwszych przy użyciu Stream API (Java)]
 var primesSum = IntStream.range(1, 1_000)
     .filter(SomeLibrary::isPrime)
@@ -25,7 +26,7 @@ var primesSum = IntStream.range(1, 1_000)
 Niektóre języki mają po prostu bardziej zwięzłą składnię niż inne.
 Przykładowo, JavaScript i Kotlin posiadają operator \texttt{?}, pozwalający pisać w 1 linii kod, który w Javie zająłby 4:
 \begin{lstlisting}[caption=Przykład obsługi null (Kotlin)]
-var obj = a?.field;
+val obj = a?.field;
 \end{lstlisting}
 \begin{lstlisting}[caption=Przykład obsługi null (Java)]
 Object obj = null;
@@ -34,8 +35,15 @@ if (a != null) {
 }
 \end{lstlisting}
 
+\subsubsection*{Refaktoryzacja}
+Istotnym elementem utrzymywania dobrej jakości kodu w dużych projektach informatycznych jest refaktoryzacja, czyli niefunkcjonalne zmiany nie niosące stricte dodatkowej wartości biznesowej,
+a jedynie polepszające jakość kodu w celu ułatwienia jego utrzymania go w przyszłości.
+Częstym elementem refaktoryzacji jest usuwanie tzw. \textit{martwego kodu}, czyli kodu który nie jest wykorzystywany -- np. gałęzie wyrażeń \texttt{switch} czy \texttt{if} które są nieosiągalne, nieużywanych metod, zmiennych czy testów.
+Innym elementem refaktoryzacji bardzo często jest skracanie istniejącego kodu do bardziej czytelnej formy.
+W przypadku mierzenia LOC na okres do analizy pracy, w przypadku refaktoryzacji ta metryka może fałszywie wskazać ujemną wydajność zespołu.
+
 \subsection{Metryki Halsteada}
-W 1977 prof Maurice Howard Halstead z Purdue University, sformułował metryki mające opisywać kod w dokładny sposób.\cite[]{halstead1977elements}
+W 1977 prof Maurice Howard Halstead z Purdue University, sformułował metryki mające opisywać kod w dokładny sposób.\cite{halstead1977elements}
 Metryki prof Halsteada opierają się o 4 wartości:
 \begin{itemize}
     \item $\eta_1$ -- liczba unikalnych operatorów

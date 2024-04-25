@@ -1,7 +1,0 @@
-\section{Implementacja mechanizmu pseudolosowego generowania dat}
-Rust wspiera przeciążanie operatorów, które skutkują bardzo czytelnym kodem operującym na datach.
-Można używać na nich podstawowych operatorów takich jak \texttt{+}, \texttt{-}, \texttt{<}, etc. oraz tworzyć z nich przedziały.\\
-Jako że metryki Kanbanowe działają z dokładnością do dni, przyjęte zostało uproszczenie przyjęcia arbitralnie wybranej stałej godziny
-i skupienie się jedynie datach operacji na zadaniach.
-Takie założenie pozwala zawężyć generator liczb pseudolosowych do zbioru liczb całkowitych, a następnie korzystając z funkcjonalności języka
-odpowiednio dodać lub odjąć je od odpowiednich dat.

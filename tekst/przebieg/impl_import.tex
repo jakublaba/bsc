@@ -1,9 +1,0 @@
-\section{Implementacja mechanizmu importu danych na platformę}
-Po podjęciu decyzji o generowaniu danych w postaci plików \texttt{.json}, zadanie było proste.
-Biblioteka \href{https://crates.io/crates/serde}{serde} w połączeniu z makrem \texttt{derive},
-pozwala na prostą implementację serializacji oraz deserializacji.
-Wystarczy zdefiniować \texttt{struct} odpowiadający strukturze pliku, a następnie okrasić go makrem \texttt{\#[derive(Serialize, Deserialize)]}.
-Makro \texttt{derive} jest alternatywa do dziedziczenia (Rust nie wspiera stricte dziedziczenia), pozwala ono na automatyczną implementacją danych interfejsów (w tym języku noszących nazwę \texttt{trait}) na strukturze,
-na podstawie implementacji tych interfejsów dla wszystkich typów jej pól.
-Wszystkie wbudowane w język typu posiadają takową implementację, w przypadku własnych typów należy zaimplementować pożądane interfejsy samodzielnie aby 
-zapewnić kompatybilność z \texttt{derive}. \cite[]{RustDerive}
