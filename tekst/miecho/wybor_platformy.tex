@@ -1,4 +1,4 @@
-\section*{Przegląd i wybór platform do analizy}
+\section{Przegląd i wybór platform do analizy}
 Na rynku istnieje wiele platform oferujących narzędzia do zarządzania projektami. Do przeglądu zostały wybrane platformy umożliwiające realizację projektów w metodyce Kanban, z uwagi na wybrane we wcześniejszej
 części pracy metryki. Przegląd krótko charakteryzuje każdą z platform oraz skupia się na wyróżniających cechach oraz obecności darmowego planu.
 \begin{itemize}
@@ -77,7 +77,7 @@ Pomimo dużej atrakcyjności Businessmap dla pracy, z uwagi na orientację na me
 Do dalszej analizy zostały wybrane Jira oraz YouTrack. Największe doświadczenie w korzystaniu z tych dwóch platform spośród wymienionych pozwoliło przeanalizować je bardziej rzetelnie
 niż byłoby to możliwe w przypadku Azure DevOps i Asany.
 
-\section*{Badanie możliwości REST API}
+\section{Badanie możliwości REST API}
 W początkowej fazie pracy, projekt miał opierać się o rest api, udostępniane przez obie platformy. \cite{JiraApiDocumentation} \cite{YouTrackApiDocumentation}
 W tym podrozdziale pracy często wykorzystywane są pojęcia mogące brzmieć podobnie, warto zacząć więc od zdefiniowania prostego słownika:
 \begin{itemize}
@@ -123,7 +123,7 @@ w ciele zapytania.\\
 Na tym etapie praca nad projektem została mocno spowolniona, ponieważ żadne z api nie udostępnia ani wszystkich potrzebnych danych do kompletnej analizy metryk, ani nie pozwala nawet ich ręcznie wprowadzić -- daty każdej operacji
 są automatycznie nadawane przez serwer i api nie pozwala w żaden sposób na obejście tego mechanizmu.
 
-\section*{Podsumowanie i wybór platformy do implementacji rozwiązania}
+\section{Podsumowanie i wybór platformy do implementacji rozwiązania}
 W związku z brakiem potrzebnych do realizacji projektu funkcjonalności w rest api obydwu platform, konieczne było poszukiwanie alternatywnego rozwiązania.
 YouTrack nie oferuje tutaj żadnych specjalnych funkcjonalności, natomiast Jira posiada swój własny język do tworzenia zapytań -- JQL (Jira Query Language). \cite{YouTrackSearch} \cite{JiraJQL}
 Na tym etapie projekt skupił się w całości na platformie Jira. Zapoznanie się z podstawami JQL było inwestycją czasu, która zwróciła się z nawiązką, szczególnie kiedy znalazłem również bibliotekę \href{https://pypi.org/project/jiraone/}{jiraone} do języka Python,

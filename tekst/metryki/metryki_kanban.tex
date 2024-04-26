@@ -4,21 +4,21 @@ do wizualizacji tzw. \textit{niewidzialnej pracy}, czyli pracy intelektualnej. K
 pojedynczy wyznacznik można łatwo oszukać. Z tego powodu, Kanban ma wiele metryk zasilających jego mechanizmy wizualizacji. \\
 Projekt koncentruje się na kilku wybranych metrykach, opisanych w kolejnych podrozdziałach.
 
-\subsection{Wiek Pracy w Toku (Age of WIP)}
-Metryka ta odnosi się do poszczególnych zadań i opisuje od ilu dni trwa praca nad nimi.
+\subsection*{Wiek pracy w toku}
+Wiek pracy w toku (age of wip) odnosi się do poszczególnych zadań i opisuje od ilu dni trwa praca nad nimi.
 Wiek Pracy w Toku pozwala szybko identyfikować blokujące się zadania poprzez odniesienie wartości metryki do danych projektu -- średniego czasu trwania zadań.
 
-\subsection{Przepustowość (Throughput)}
-Metryka ta opisuje ile jednostek wartości dostarczamy w danym czasie. Metryka podobna do \textit{Velocity} znanego ze Scruma. Jednostką wartości mogą być \textit{storypoints}, zadania, funkcjonalności, itd.
+\subsection*{Przepustowość}
+Przepustowość (throughput) opisuje ile jednostek wartości dostarczamy w danym czasie. Metryka podobna do \textit{Velocity} znanego ze Scruma. Jednostką wartości mogą być \textit{storypoints}, zadania, funkcjonalności, itd.
 Metryka ta daje bardzo uproszczony i ogólny wgląd w wydajność zespołu.
 
-\subsection{Efektywność przepływu (Flow efficiency)}
-Metryka ta jest nieco bardziej złożona: aby policzyć efektywność przepływu, rozpatrujemy ile czasu zadanie znajdowało się w stanie aktywnym (faktycznie była przeprowadzana nad nim praca), a ile czasu
+\subsection*{Efektywność przepływu}
+Efektywność przepływu (flow efficiency) jest nieco bardziej złożoną metryką: aby policzyć efektywność przepływu, rozpatrujemy ile czasu zadanie znajdowało się w stanie aktywnym (faktycznie była przeprowadzana nad nim praca), a ile czasu
 w stanie oczekiwania (przykładowo statusy: \textit{``Selected for development''}, \textit{``Ready for testing''}, itd.). Wartość tej metryki to stosunek czasu spędzonego w stanie aktywnym do czasu w stanie oczekiwania.
 W przypadku niskiej wydajności zespołu, efektywność przepływu pozwala zidentyfikować czy jest to spowodowane tempem pracy, czy nieoptymalnymi procedurami przekazywania zadań pomiędzy etapami.
 
-\subsection{Czas realizacji (Lead time)}
-Aby opisać tę metrykę, wpierw konieczne jest zdefiniowanie takich pojęć jak \textit{punkt zobowiązania} oraz \textit{punkt dostarczenia}.
+\subsection*{Czas realizacji}
+Aby opisać czas realizacji (lead time), wpierw konieczne jest zdefiniowanie takich pojęć jak \textit{punkt zobowiązania} oraz \textit{punkt dostarczenia}.
 Kanban jest zorientowany biznesowo, stąd punkt zobowiązania nie jest momentem faktycznego rozpoczęcia pracy nad zadaniem, tylko momentem zadeklarowania się przez zespół, że zadanie zostanie wykonane.
 Przykładowo, w Scrumie punktem zobowiązania byłby sprint planning, a nie moment przeciągnięcia zadania ze statusu \textit{``TODO''} do \textit{``In Progress''}.\\
 Punkt dostarczenia, to punkt oddania skończonego zadania --- w zależności od specyfiki zespołu może to oznaczać różne rzeczy, np.\ jeżeli zespół kontroluje cały produkt, to punktem dostarczenia

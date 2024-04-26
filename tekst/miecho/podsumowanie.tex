@@ -1,0 +1,21 @@
+W pracy została podjęta analiza szeregu metryk pod kątem ich zastosowania w kontekście pomiaru pracy zespołu.
+Przeprowadzono przegląd platform do zarządzania projektami, dalej dokonując bardziej szczegółowej analizy Jiry oraz YouTracka pod kątem
+metryk metodyki Kanban.
+Następnie przeprowadzana została analiza struktury danych projektu i zadań na podstawie dokumentacji oraz technik reverse-engineering, oraz zaimplementowane rozwiązanie
+pozwalające na generowanie przykładowych danych, wybierając czas trwania projektu oraz konfigurując dostępne w projekcie statusy.
+Dane uzyskane w ten sposób pozwoliły na wypełnienie projektu danymi oraz zapewnienie chronologii w historii zadań.
+
+Niestety nie udało się osiągnąć integracji z narzędziami do generowania wykresów bezpośrednio w Jirze, z uwagi na brak wystarczającej dokumentacji.
+Z analizy danych eksportowanych z Jiry zakładałem, że opierają się one na niestandardowym polu "timespent", które opisuje ile razy zadanie znajdowało się w każdym ze statusów
+oraz ile łącznie spędziło w nim czasu. Po implementacji tego pola jednak nadal wszystkie zadania na wykresach były kategoryzowane jakby nadal znajdowały się w pierwszym statusie (w zależności
+od testowanych szablonów "To Do" lub "Backlog").
+
+\section*{Możliwości dalszej rozbudowy projektu}
+W obecnej formie aplikacja posiada jedynie podstawowe funkcjonalności, pozostawiając nadal wiele pola do rozwoju.
+Istotnym ulepszeniem byłaby wspomniana integracja z narzędziami do generowania wykresów wbudowanymi bezpośrednio w Jirę aby zwiększyć wygodę analizy generowanych danych.
+Wiele wartości dodałaby tutaj możliwość dokładniejszej kontroli nad parametrami generowania, aby móc tworzyć bardziej precyzyjne scenariusze do nauki, pozwalając np. na celowe generowanie projektów
+które postępują bardzo sprawnie lub wręcz przeciwnie. Do osiągnięcia takich rezultatów można by było wprowadzić kontrolę nad rozkładem zadań w różnych statusach -- konfigurując precyzyjne ilości lub
+ich proporcje do siebie nawzajem. Innym parametrem którego kontrolowanie pozwoliłoby zwiększyć atrakcyjność aplikacji jest możliwość manipulacji czasem trwania zadań lub czas ich przebywania w 
+poszczególnych statusach -- w sposób precyzjny, lub na podstawie wybranych rozkładów losowych.
+Jeśli chodzi o kompatybilność aplikacji z więcej niż jedną platformą, jest to poniekąd osiągnięte poprzez wybór Jiry, będącej najpopularniejszą z nich.
+Popularnością Jiry podyktowana jest możliwość importu projektów z niej w innych narzędziach, takich jak YouTrack czy Azure DevOps.

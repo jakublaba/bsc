@@ -45,6 +45,8 @@
     \let\XeLaTeX\LaTeX
 \fi
 
+\RequirePackage{float}
+
 % -------------------------------------------------------------------
 % Zdefiniowanie parametru klasy
 % -------------------------------------------------------------------
@@ -793,9 +795,9 @@
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}} 
 \newcommand{\frontpages}{
     \counterwithout{lstlisting}{chapter} % hack niestety
-    \pagestyle{empty}
+    % \pagestyle{empty}
     \maketitle
-    \abstractpages
+    % \abstractpages
 % Zgodnie z Zarządzeniem JM Rektora 3/2022, oświadczenia o autorstwie i
 % opcjonalne oświadczenie o udzieleniu licencji składane są w systemie USOS
 % APD.
