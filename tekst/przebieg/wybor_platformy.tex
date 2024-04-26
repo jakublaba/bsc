@@ -1,17 +1,89 @@
-\section{Wybór platformy}
-W ramach wstępnych badań do pracy zostały porównane funkcjonalności platform:
+\section*{Przegląd i wybór platform do analizy}
+Na rynku istnieje wiele platform oferujących narzędzia do zarządzania projektami. Do przeglądu zostały wybrane platformy umożliwiające realizację projektów w metodyce Kanban, z uwagi na wybrane we wcześniejszej
+części pracy metryki. Przegląd krótko charakteryzuje każdą z platform oraz skupia się na wyróżniających cechach oraz obecności darmowego planu.
 \begin{itemize}
     \item \href{https://www.atlassian.com/software/jira}{Jira}
+    \item \href{https://azure.microsoft.com/en-us/products/devops/}{Azure DevOps}
     \item \href{https://www.jetbrains.com/youtrack/}{YouTrack}
+    \item \href{https://asana.com/}{Asana}
+    \item \href{https://businessmap.io/}{Businessmap (wcześniej Kanbanize)}
 \end{itemize}
 
-\subsection*{Badanie możliwości REST API}
-W początkowej fazie pracy, projekt miał opierać się o rest api, udostępniane przez każdą z platform. \cite{JiraApiDocumentation} \cite{YouTrackApiDocumentation}
-W tej sekcji często wykorzystywane są pojęcia mogące brzmieć podobnie, warto zacząć więc od zdefiniowania prostego słownika:
+\subsection*{Jira}
+\subsubsection*{Charakterystyka}
+Atlassian niewątpliwie jest największym graczem na rynku w tej kategorii. Jira najbardziej popularna jest wśród projektów IT, jednak wśród dostępnych szablonów projektów możemy zaobserować również takie
+kategorie jak "Marketing", "Human Resources" czy "Legal". Jira oferuje również integrację z innymi narzędziami Atlassian: Confluence, znajdujące zastosowanie m.in. w prowadzeniu i organizacji dokumentacji oraz
+Bitbucket, oferującego kontrolę wersji oraz narzędzia CI/CD.
+\subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item id projektu -- wewnętrzny identyfikator przydzielany projektom przy utworzeniu
+    \item Silne wsparcie dla metodyk zwinnych
+    \item Rozbudowane możliwości automatyzacji
+    \item Szeroka oferta gotowych wtyczek oraz wiele możliwości personalizacji we własnym zakresie
+\end{itemize}
+\subsection*{Darmowy Plan}
+Jira posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+
+\subsection*{Azure DevOps}
+\subsubsection*{Charakterystyka}
+Microsoft oferuje zestaw narzędzi do zarządzania projektami, kontrolą wersji, procesami CI/CD oraz monitorowania. Azure DevOps został zaprojektowany z myślą o integracji z platformą Azure, oferującej
+szeroki wachlarz różnych usług chmurowych. 
+\subsubsection*{Wyróżniające cechy}
+\begin{itemize}
+    \item Silna orientacja na zespoły techniczne poprzez integrację CI/CD oraz kontroli wersji bez dodatkowych narzędzi
+    \item Mocne osadzenie w Microsoftowym ekosystemie -- nacisk na platformę Azure oraz integracja z Visual Studio
+\end{itemize}
+\subsection*{Darmowy Plan}
+Azure DevOps posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+
+\subsection*{YouTrack}
+\subsubsection*{Charakterystyka}
+Rozwiązanie od JetBrains w wielu aspektach jest bardzo podobne do Jiry -- również stawia na elastyczność poprzez rozbudowane możliwości personalizacji oraz koncentruje się na metodykach zwinnych.
+YouTrack jest nieco mniej dojrzałym systemem, a więc nie posiada tak rozbudowanych funkcjonalności jak Jira. YouTrack nadrabia te braki poprzez koncentrację na produktywności poprzez przejrzystość
+interfejsu i optymalizację silnika wyszukiwań, co pozwala na bardzo szybkie wyszukiwane konkretnych zadań. JetBrains wykorzystuje również swoją silną pozycję na rynku zintegrowanych środowisk programistycznych,
+oferując integrację YouTracka ze wszystkimi z nich.
+\subsubsection*{Wyróżniające cechy}
+\begin{itemize}
+    \item Silna orientacja na zespoły techniczne poprzez integrację z IDE oraz szybką nawigowalność platformy jedynie klawiaturą
+    \item Elastyczność podobna do Jiry przy dużo mniejszym stopniu skomplikowania platformy
+\end{itemize}
+\subsection*{Darmowy Plan}
+YouTrack posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+
+\subsection*{Asana}
+\subsubsection*{Charakterystyka}
+Pierwsze z omawianych narzędzi które nie koncentruje się na projektach informatycznych. Asana najbardziej popularna jest wśród zespołów biznesowych oraz kreatywnych, oferując
+przejrzysty i szybki do nauki interfejs oraz funkcjonalności wspierające współpracę: różne widoki projektów (w formie tablicy Kanban, osi czasu bądź kalendarza), raporty oraz możliwości łączenia
+projektów w większe struktury.
+\subsubsection*{Wyróżniające cechy}
+\begin{itemize}
+    \item Orientacja biznesowa
+\end{itemize}
+\subsection*{Darmowy Plan}
+Asana posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+
+\subsection*{Businessmap (wcześniej Kanbanize)}
+\subsubsection*{Charakterystyka}
+Businessmap, jak wskazuje jego poprzednia nazwa, opiera się w całości o metodykę Kanban.
+Głównym elementem interfejsu są tutaj tablice, a cała platforma jest zaprojektowana wokół idei wizualizacji pracy oraz przepływu zadań.
+\subsubsection*{Wyróżniające cechy}
+\begin{itemize}
+    \item Orientacja w całości na metodyce Kanban
+\end{itemize}
+\subsection*{Darmowy Plan}
+Businessmap nie posiada darmowego planu, oferuje jedynie darmowy okres próbny na 90 dni.
+
+\subsection*{Podsumowanie i wybór platform do dalszej analizy}
+Pomimo dużej atrakcyjności Businessmap dla pracy, z uwagi na orientację na metodykę Kanban, brak planu darmowego niestety eliminuje tę platformę z dalszej analizy.
+Do dalszej analizy zostały wybrane Jira oraz YouTrack. Największe doświadczenie w korzystaniu z tych dwóch platform spośród wymienionych pozwoliło przeanalizować je bardziej rzetelnie
+niż byłoby to możliwe w przypadku Azure DevOps i Asany.
+
+\section*{Badanie możliwości REST API}
+W początkowej fazie pracy, projekt miał opierać się o rest api, udostępniane przez obie platformy. \cite{JiraApiDocumentation} \cite{YouTrackApiDocumentation}
+W tym podrozdziale pracy często wykorzystywane są pojęcia mogące brzmieć podobnie, warto zacząć więc od zdefiniowania prostego słownika:
+\begin{itemize}
+    \item id projektu -- wewnętrzny identyfikator przydzielany projektom przy utworzeniu przez system
     \item klucz projektu -- akronim nazwy projektu lub nazwa projektu skrócona do kilku liter
-    \item id zadania -- wewnętrzny identyfikator przydzielany zadaniom przy utworzeniu
+    \item id zadania -- wewnętrzny identyfikator przydzielany zadaniom przy utworzeniu przez system
     \item klucz zadania -- identyfikator zadań bardziej czytelny dla człowieka, numer zadania w kolejności chronologicznej, prefiksowany kluczem projektu.
     Przykładowo, projekt o kluczu \texttt{AG} będzie posiadał zadania o kluczach \texttt{AG-1, AG-2}, itd.
 \end{itemize}
@@ -21,7 +93,6 @@ W celu pobrania danych zadania należy wykonać zapytanie \texttt{GET} odpowiedn
     \item \texttt{https://[instancja jiry]/rest/api/2/issues/[id/key]} -- Jira
     \item \texttt{https://[instancja youtracka]/api/issues/[id]} -- YouTrack
 \end{itemize}
-
 
 W przypadku Jiry odpowiedź zawiera kompletny zestaw danych -- poza podstawowym informacjami jak id, klucz czy projekt do którego należy zadanie, otrzymujemy również ogromną ilość
 danych związanych z historią zadania, możliwościami operacji na zadaniu, a nawet metadanych związanych z szablonami wykorzystanymi do tworzenia projektu lub użytych rozszerzeń.
@@ -52,7 +123,7 @@ w ciele zapytania.\\
 Na tym etapie praca nad projektem została mocno spowolniona, ponieważ żadne z api nie udostępnia ani wszystkich potrzebnych danych do kompletnej analizy metryk, ani nie pozwala nawet ich ręcznie wprowadzić -- daty każdej operacji
 są automatycznie nadawane przez serwer i api nie pozwala w żaden sposób na obejście tego mechanizmu.
 
-\subsection*{Poszukiwanie alternatywy dla REST API}
+\section*{Podsumowanie i wybór platformy do implementacji rozwiązania}
 W związku z brakiem potrzebnych do realizacji projektu funkcjonalności w rest api obydwu platform, konieczne było poszukiwanie alternatywnego rozwiązania.
 YouTrack nie oferuje tutaj żadnych specjalnych funkcjonalności, natomiast Jira posiada swój własny język do tworzenia zapytań -- JQL (Jira Query Language). \cite{YouTrackSearch} \cite{JiraJQL}
 Na tym etapie projekt skupił się w całości na platformie Jira. Zapoznanie się z podstawami JQL było inwestycją czasu, która zwróciła się z nawiązką, szczególnie kiedy znalazłem również bibliotekę \href{https://pypi.org/project/jiraone/}{jiraone} do języka Python,
@@ -63,5 +134,3 @@ Po dalszych badaniach udało znaleźć się alternatywny sposób wypełniania pr
 Jira pozwala importować dane z różnych źródeł, ale szczególną uwagę przykuły pliki \texttt{.csv} oraz \texttt{.json} ze względu na prostotę.
 Dokumentacja importu z obu formatów okazała się dość wybrakowana pod kątem danych istotnych dla projektu. Jednak jako że eksport za pomocą JQL zwracał format JSON, reverse-engineering za pomocą wcześniej napisanych skryptów w Pythonie nie był
 żadnym problemem.
-
-% TODO opis struktury historii
