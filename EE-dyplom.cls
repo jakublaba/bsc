@@ -159,15 +159,21 @@
 %   margines zewnętrzny 20 mm,
 %   marginesy górny i dolny 20 mm
 % -------------------------------------------------------------------
-\RequirePackage[a4paper,
-    includehead,
-    includefoot,
-    inner=30mm,
-    outer=20mm,
-    vmargin=25mm]
-{geometry}
+% \RequirePackage[
+%     a4paper,
+%     twoside,
+%     inner=30mm,
+%     outer=20mm,
+%     top=25mm,
+%     bottom=25mm,
+%     bindingoffset=10mm
+% ]{geometry}
+\RequirePackage[
+    a4paper,
+    margin=20mm,
+]{geometry}
 % Do debugowania wymiarów
-%\RequirePackage{showframe}
+% \RequirePackage{showframe}
 
 % -------------------------------------------------------------------
 % Odstęp międzywierszowy
@@ -185,7 +191,7 @@
 %\singlespacing % == \setstretch{1.0}
 % -------------------------------------------------------------------
 % Alternatywnie superzłoty podział (0.83333 * 1.46557)
-\setstretch{1.2213}
+% \setstretch{1.2213}
 % -------------------------------------------------------------------
 % Alternatywnie interlinia 1.5
 %\onehalfspacing % == \setstretch{1.25} 1.25*1.2=1.5
@@ -203,20 +209,16 @@
 % -------------------------------------------------------------------
 \RequirePackage{fancyhdr}
 \fancyhf{}
-\fancypagestyle{plain}{ %
+\fancypagestyle{plain}{
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0pt}
     \fancyfoot[RO,LE]{\thepage}
 }
 \fancypagestyle{headings}{
     \fancyhf{}
     \renewcommand{\headrulewidth}{1pt}
-    \fancyheadoffset{0cm}
-    \fancyhead[LE]{\textit{\nouppercase{\leftmark}}}
-    \fancyhead[RO]{\textit{\nouppercase{\rightmark}}}
+    \fancyhead[LE,RO]{\textit{\nouppercase{\leftmark}}}
     \fancyfoot[RO,LE]{\thepage}
-    \renewcommand{\footrulewidth}{0pt}
     \setlength{\headheight}{16pt}
 }
 \pagestyle{headings}
@@ -380,25 +382,25 @@
 % -------------------------------------------------------------------
 % Kolory
 % -------------------------------------------------------------------
-\RequirePackage[usenames,dvipsnames]{xcolor}
-\definecolor{mysamplecolor}{rgb}{0.123, 0.456, 0.789}
-% Kolory wydziałów "budowlanych"
-\definecolor{bud}{RGB}{106, 186, 156}
+% \RequirePackage[usenames,dvipsnames]{xcolor}
+% \definecolor{mysamplecolor}{rgb}{0.123, 0.456, 0.789}
+% % Kolory wydziałów "budowlanych"
+% \definecolor{bud}{RGB}{106, 186, 156}
 
-% Kolory wydziałów "mechanicznych"
-\definecolor{mech}{RGB}{234, 124, 90}
+% % Kolory wydziałów "mechanicznych"
+% \definecolor{mech}{RGB}{234, 124, 90}
 
-% Kolory wydziałów "chemicznych"
-\definecolor{chem}{RGB}{254, 213, 66}
+% % Kolory wydziałów "chemicznych"
+% \definecolor{chem}{RGB}{254, 213, 66}
 
-% Kolory wydziałów "elektrycznych"
-\definecolor{elek}{RGB}{120, 150, 207}
+% % Kolory wydziałów "elektrycznych"
+% \definecolor{elek}{RGB}{120, 150, 207}
 
-% Kolory wydziałów "matematyczno-fizycznych"
-\definecolor{mfiz}{RGB}{150, 95, 119}
+% % Kolory wydziałów "matematyczno-fizycznych"
+% \definecolor{mfiz}{RGB}{150, 95, 119}
 
-% Kolory wydziałów "multidyscyplinarnych"
-\definecolor{multi}{RGB}{180, 160, 170}
+% % Kolory wydziałów "multidyscyplinarnych"
+% \definecolor{multi}{RGB}{180, 160, 170}
 
 % Kolor Wydziału Elektrycznego i dwa pokrewne monochromatyczne.
 % Kolor podstawowy jest tu określony w przybliżeniu, gdyż 

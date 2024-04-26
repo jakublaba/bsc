@@ -1,4 +1,3 @@
-\newpage
 \section{Metryki Statyczne}
 Pierwszym rodzajem omawianych metryk są metryki statyczne. Spośród omawianych w tej pracy metryk wyróżniają się tym,
 że jako jedyne nie skupiają się na mierzeniu parametrów pracy zespołu, tylko kodu.
@@ -22,6 +21,7 @@ var primesSum = IntStream.range(1, 1_000)
     .sum();
 \end{lstlisting}
 
+\newpage
 \subsubsection*{Różnice składni i stylu kodu}
 Niektóre języki mają po prostu bardziej zwięzłą składnię niż inne.
 Przykładowo, JavaScript i Kotlin posiadają operator \texttt{?}, pozwalający pisać w 1 linii kod, który w Javie zająłby 4:
@@ -37,7 +37,7 @@ if (a != null) {
 
 \subsubsection*{Refaktoryzacja}
 Istotnym elementem utrzymywania dobrej jakości kodu w dużych projektach informatycznych jest refaktoryzacja, czyli niefunkcjonalne zmiany nie niosące stricte dodatkowej wartości biznesowej,
-a jedynie polepszające jakość kodu w celu ułatwienia jego utrzymania go w przyszłości.
+a jedynie polepszające jakość kodu w celu ułatwienia jego utrzymania w przyszłości.
 Częstym elementem refaktoryzacji jest usuwanie tzw. \textit{martwego kodu}, czyli kodu który nie jest wykorzystywany -- np. gałęzie wyrażeń \texttt{switch} czy \texttt{if} które są nieosiągalne, nieużywanych metod, zmiennych czy testów.
 Innym elementem refaktoryzacji bardzo często jest skracanie istniejącego kodu do bardziej czytelnej formy.
 W przypadku mierzenia LOC na okres do analizy pracy, w przypadku refaktoryzacji ta metryka może fałszywie wskazać ujemną wydajność zespołu.
