@@ -171,10 +171,10 @@
 % ]{geometry}
 \RequirePackage[
     a4paper,
-    top=20mm,
-    bottom=20mm,
-    left=25mm,
-    right=25mm
+    top=30mm,
+    bottom=30mm,
+    left=30mm,
+    right=30mm
 ]{geometry}
 % Do debugowania wymiarów
 % \RequirePackage{showframe}
@@ -195,13 +195,13 @@
 %\singlespacing % == \setstretch{1.0}
 % -------------------------------------------------------------------
 % Alternatywnie superzłoty podział (0.83333 * 1.46557)
-\setstretch{1.2213}
+% \setstretch{1.2213}
 % -------------------------------------------------------------------
 % Alternatywnie interlinia 1.5
 %\onehalfspacing % == \setstretch{1.25} 1.25*1.2=1.5
 % -------------------------------------------------------------------
 % Alternatywnie złoty podział (odstęp 1.618):
-%\setstretch{1.348333}
+\setstretch{1.348333}
 % -------------------------------------------------------------------
 % Alternatywnie podwójna interlinia
 %\doublespacing
