@@ -1,4 +1,5 @@
 \section{Weryfikacja rozwiązania}
+\subsection{Przykład uruchomienia programu}
 W celu skorzystania z programu agilemaster, należy stworzyć wspomniane wcześniej pliki z danymi użytkownika oraz danymi dostępowymi do api.
 Następnie, wprowadzamy do programu wybrane parametry. Nazwa projektu musi zgadzać się z nazwą projektu stworzonego na instancji Jiry, podobnie jak nazwy statusów.
 Kolejność podania statusów ma znaczenie, ponieważ bez dodatkowej konfiguracji nie jest możliwy inny sposób ustalenia ich naturalnej progresji.
@@ -42,3 +43,42 @@ Przy inspekcji zakładki "History" w zadaniu możemy zaobserwować poprawną chr
     \includegraphics[width=15cm,keepaspectratio]{rysunki/jira-issue-history.png}
     \caption{Historia przykładowego zaimportowanego zadania}
 \end{figure}
+
+\subsection{Przykład analizy metryk}
+Z uwagi na fakt, że zaimplementowanie integracji z wbudowanymi narzędziami analitycznymi nie było możliwe, niestety nie można przeprowadzić analizy metryk bezpośrednio na Jirze. Nadal można jednak łatwo wydobyć potrzebne
+dane za pomocą JQL, a następnie obliczyć je w arkuszu kalkulacyjnym lub narzędziu do analizy biznesowej.
+
+Ten podrozdział prezentuje przykładowe zapytania JQL, które można zastosować do wydobycia danych potrzebnych do analizy metryk.
+
+\subsubsection*{Wiek pracy w toku}
+W celu obliczenia wieku pracy w toku dla konkretnego zadania, można wydobyć je prostym zapytaniem o klucz: \lstinline{key = "KT-3"}.
+Następnie należy obliczyć ilość dni pomiędzy obecną datą, a datą utworzenia zadania.
+Na podobnej zasadzie można obliczyć średni wiek pracy w toku dla większej ilości zadań dla celów monitorowania produktywności, aby szybko identyfikować blokujące się zadania gdy zaczynają znacznie przekraczać średnią wartość tej metryki.
+
+\subsubsection*{Przepustowość}
+Przepustowość można otrzymać licząc ilość wyników zwróconych przez zapytanie JQL, filtrujące zadania po przejściu do wybranego statusu oznaczającego zakończenie zadania, oraz w wybranym przedziale czasowym.
+\begin{lstlisting}[caption=Zapytanie JQL pozwalające obliczyć przepustowość w przeciągu ostatniego tygodnia]
+status CHANGED TO "Done" DURING (-7d, now())
+\end{lstlisting}
+
+\subsubsection*{Efektywność przepływu}
+Do obliczenia efektywności przepływu potrzeba zidentyfikować które statusy były aktywne, a które pasywne.
+
+W rozpatrywanym tutaj przypadku testowym, jedynym aktywny statusem był "In Progress", należy więc znaleźć wszystkie zadania które znajdowały się w tym statusie.
+\begin{lstlisting}[caption=Zapytanie JQL pozwalające obliczyć efektywność przepływu]
+status WAS "In Progress"
+\end{lstlisting}
+
+W otrzymanych wynikach wyszukiwania za pomocą wybranego narzędzia należy obliczyć całkowity czas znajdowania się w statusach aktywnych i pasywnych, oraz obliczyć proporcję jednego do drugiego.
+
+\subsubsection*{Czas realizacji}
+Do obliczenia czasu realizacji potrzeba zdefiniować który status jest punktem realizacji, a który punktem dostarczenia.
+
+W rozpatrywanym tutaj przypadku testowym, punktem zobowiązania był status "Selected for Development", natomiast punktem dostarczenia status "Done".
+\begin{lstlisting}[caption=Zapytanie JQL pozwalające obliczyć czas dostarczenia w przeciągu ostatniego tygodnia]
+status WAS "Selected for Development" DURING (-7d, now())
+AND status CHANGED TO "Done" DURING(-7d, now())
+\end{lstlisting}
+
+Następnie w wybranym narzędziu należy obliczyć okres pomiędzy datami znalezienia się zadania w tych dwóch statusach.
+Na podobnej zasadzie można obliczyć średni czas realizacji dla większej ilości zadań w celu zdobycia danych do estymacji jakie zobowiązania można podjąć wobec klienta.

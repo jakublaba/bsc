@@ -46,6 +46,7 @@
 \fi
 
 \RequirePackage{float}
+\RequirePackage[hyphens]{url}
 
 % -------------------------------------------------------------------
 % Zdefiniowanie parametru klasy
@@ -170,7 +171,10 @@
 % ]{geometry}
 \RequirePackage[
     a4paper,
-    margin=20mm,
+    top=20mm,
+    bottom=20mm,
+    left=25mm,
+    right=25mm
 ]{geometry}
 % Do debugowania wymiarów
 % \RequirePackage{showframe}
@@ -191,7 +195,7 @@
 %\singlespacing % == \setstretch{1.0}
 % -------------------------------------------------------------------
 % Alternatywnie superzłoty podział (0.83333 * 1.46557)
-% \setstretch{1.2213}
+\setstretch{1.2213}
 % -------------------------------------------------------------------
 % Alternatywnie interlinia 1.5
 %\onehalfspacing % == \setstretch{1.25} 1.25*1.2=1.5
@@ -687,9 +691,9 @@
 \newcommand{\abstractpages}{
     \ifnum\strcmp{\locallang}{PL} = 0
         \stronastreszczenia
-        % \abstractpage
+        \abstractpage
     \else
-        % \abstractpage
+        \abstractpage
         \stronastreszczenia
     \fi
 }
@@ -797,9 +801,9 @@
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}} 
 \newcommand{\frontpages}{
     \counterwithout{lstlisting}{chapter} % hack niestety
-    % \pagestyle{empty}
+    \pagestyle{empty}
     \maketitle
-    % \abstractpages
+    \abstractpages
 % Zgodnie z Zarządzeniem JM Rektora 3/2022, oświadczenia o autorstwie i
 % opcjonalne oświadczenie o udzieleniu licencji składane są w systemie USOS
 % APD.

@@ -1,0 +1,53 @@
+\section{Metryki w modelu COCOMO/COCOMO II}
+COCOMO (Constructive Cost Model) jest modelem tworzenia kosztorysów dla projektów informatycznych, zaprojektowanym przez Barry'ego Boehma w 1981 roku. \cite[]{CocomoBoehm} COCOMO skupia się na szacowaniu kosztu oraz czasu projektu na podstawie metryk związanych z kodem oraz pracą zespołu.
+W 1997 roku zaproponowano zaktualizowaną wersję, znaną jako COCOMO II, która została dostosowana do rozwoju trendów i technologii.
+
+Najistotniejszą metryką w modelu COCOMO/COCOMO II, na której opiera się większość obliczeń jest liczba linii kodu źródłowego, wspomniana w rozdziale o metrykach statycznych. \ref{loc}
+
+\subsection{Pracochłonność}
+\label{cocomo:effort}
+Pracochłonność (effort) określa ilość pracy potrzebną do ukończenia projektu. W modelu COCOMO II stosuje się wzór:
+$E = a \times (SLOC^b) \times \prod_{i=1}^{n}E_i$,
+gdzie:
+\begin{itemize}
+    \item $a$ - współczynnik zależny od typu projektu
+    \item $b$ - współczynnik skalowania
+    \item $SLOC$ - liczba linii kodu źródłowego
+    \item $E_i$ - współczynniki kosztowe
+\end{itemize}
+Współczynniki kosztowe uwzględniają różne aspekty projektu, jak np. poziom doświadczenia zespołu, złożoność oprogramowania lub technologie stosowane w projekcie.
+
+\subsection{Czas realizacji}
+Czas realizacji (development time) określa czas potrzebny do ukończenia projektu. Jest obliczany na podstawie pracochłonności oraz innych czynników wpływających na tempo pracy. Stosuje się wzór:
+$T = c \times E^d$,
+gdzie:
+\begin{itemize}
+    \item $E$ - pracochłonność
+    \item $c$, $d$ - współczynniki zależne od typu projektu
+\end{itemize}
+
+\subsection{Wskaźniki skalowania}
+\label{cocomo:scalefactors}
+Wskaźniki skalowania (scale factors) mają istotny wpływ na obliczenia w modelu COCOMO II. Wyróżnia się pięć głównych:
+\begin{itemize}
+    \item PREC (Precedentness) - jak dobrze zdefiniowany jest projekt i czy zespół wcześniej miał do czynienia z czymś podobnym
+    \item FLEX (Development flexibility) - poziom elastyczności w podejściu do rozwoju projektu
+    \item RESL (Architecture / Risk resolution) - poziom analizy architektury i ryzyka
+    \item TEAM (Team cohesion) - jak dobrze zespół współpracuje
+    \item PMAT (Process maturity) - dojrzałość procesu, jak stabilny i przetestowany jest
+\end{itemize}
+Wskaźniki te są używane do obliczenia współczynnika $b$ w obliczaniu pracochłonności. \ref{cocomo:effort} Każdy wskaźnik jest ocenianiany na pięciostopniowej skali od "bardzo niski" do "bardzo wysoki",
+wpływając na ostateczną wartość $b$.
+
+\subsection{Współczynniki kosztowe}
+Współczynniki kosztowe (cost drivers) to zestaw czynników wpływających na złożoność projektu. Model COCOMO II definiuje wiele takich współczynników, podzielonych na kategorie techniczne, organizacyjne i zespołowe. Niektóre z tych współczynników to:
+\begin{itemize}
+    \item RELY (Required software reliability) - wymagany poziom niezawodności oprogramowania
+    \item DATA (Database size) - wielkość bazy danych w stosunku do kodu
+    \item CPLX (Product complexity) - złożoność produktu
+    \item TIME (Execution time constraint) - ograniczenie czasowe wykonania
+    \item STOR (Main storage constraint) - ograniczenie dotyczące pamięci
+    \item VIRT (Virtual machine volatility) - stabilność maszyny wirtualnej
+\end{itemize}
+Podobnie jak w przypadku współczynników skalowania \ref{cocomo:scalefactors}, każdy ze współczynników ma określony poziom wpływu, zastosowany we wzorze na pracochłonność \ref{cocomo:effort}, co pozwala
+na dokładniejsze szacowanie kosztów i czasu realizacji projektu.

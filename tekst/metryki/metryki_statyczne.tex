@@ -4,15 +4,19 @@ Pierwszym rodzajem omawianych metryk są metryki statyczne. Spośród omawianych
 Część z nich jest w dzisiejszych czasach zintegrowana w narzędziach deweloperskich, takich jak \href{https://www.synopsys.com/software-integrity/static-analysis-tools-sast/coverity.html}{Coverity}
 lub \href{https://www.sonarsource.com/products/sonarlint/}{SonarLint}.
 
-\subsection*{Liczba linii kodu (LOC)}
-Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code -- LOC). Metryka ta skupia się stricte na analizie kodu źródłowego, aby przełożyć
-ją na metrykę mierzącą pracę zespołu, można mierzyć LOC na dany okres.
+\subsection{Liczba linii kodu}
+\label{loc}
+Najprostszą metryką statyczną jest liczba linii kodu (ang. Lines of Code, LOC). Liczba linii kodu nie bierze pod uwagę pustych linii oraz komentarzy.
+
+Aby przełożyć ją na metrykę mierzącą pracę zespołu, można mierzyć LOC na dany okres.
+
 Jest to dobra metryka do orientacyjnej oceny rozmiaru projektu czy danej funkcjonalności, jednak nie nadaje
 się do dokładniejszych analiz, ze względu na fundamentalne wady.
 
 \subsubsection*{Mniej linii nie zawsze oznacza lepszy kod}
 Jako przykład można przyjrzeć się tzw. \textit{fluent API}, czyli interfejsom programistycznym zaprojektowanym z myślą o łańcuchowym wywoływaniu metod.
-Przykładem takich interfejsów są np. Stream API (Java), AssertJ (Java), JooQ (Java), LINQ (C\#).
+
+Przykładem takich interfejsów są np. Stream API, AssertJ, czy JOOQ (Java).
 Przy korzystaniu z tego typu interfejsów, wywoływanie kolejnych metod w pojedynczej linii jest bardzo nieczytelne, zalecane jest
 umieszczanie każdego wywołania metody w nowej linii, co wpływa negatywnie na metrykę LOC.
 \begin{lstlisting}[caption=Sumowanie liczb pierwszych przy użyciu Stream API (Java)]
@@ -24,6 +28,7 @@ var primesSum = IntStream.range(1, 1_000)
 \newpage
 \subsubsection*{Różnice składni i stylu kodu}
 Niektóre języki mają po prostu bardziej zwięzłą składnię niż inne.
+
 Przykładowo, JavaScript i Kotlin posiadają operator \texttt{?}, pozwalający pisać w 1 linii kod, który w Javie zająłby 4:
 \begin{lstlisting}[caption=Przykład obsługi null (Kotlin)]
 val obj = a?.field;
@@ -38,11 +43,13 @@ if (a != null) {
 \subsubsection*{Refaktoryzacja}
 Istotnym elementem utrzymywania dobrej jakości kodu w dużych projektach informatycznych jest refaktoryzacja, czyli niefunkcjonalne zmiany nie niosące stricte dodatkowej wartości biznesowej,
 a jedynie polepszające jakość kodu w celu ułatwienia jego utrzymania w przyszłości.
+
 Częstym elementem refaktoryzacji jest usuwanie tzw. \textit{martwego kodu}, czyli kodu który nie jest wykorzystywany -- np. gałęzie wyrażeń \texttt{switch} czy \texttt{if} które są nieosiągalne, nieużywanych metod, zmiennych czy testów.
 Innym elementem refaktoryzacji bardzo często jest skracanie istniejącego kodu do bardziej czytelnej formy.
+
 W przypadku mierzenia LOC na okres do analizy pracy, w przypadku refaktoryzacji ta metryka może fałszywie wskazać ujemną wydajność zespołu.
 
-\subsection*{Metryki Halsteada}
+\subsection{Metryki Halsteada}
 W 1977 prof Maurice Howard Halstead z Purdue University, sformułował metryki mające opisywać kod w dokładny sposób.\cite{halstead1977elements}
 Metryki prof Halsteada opierają się o 4 wartości:
 \begin{itemize}
@@ -62,11 +69,42 @@ Na ich podstawie można obliczyć następujące parametry:
     \item Czas: $T = \frac{E}{18}[s]$
     \item Bugi: $B = \frac{E^{\frac{2}{3}}}{3000}$ Później uproszczone do $B = \frac{V}{3000}$
 \end{itemize}
+\newpage
 Metryki te nie przyjęły się, ze względu na ich właściwości:
 \begin{enumerate}
     \item Objętość programu jest liniowo zależna od długości
     \item Wysiłek jest liniowo zależny od objętości
     \item Czas jest liniowo zależny od wysiłku
 \end{enumerate}
-Łańcuch tych zależności sprowadza się do tego, że każda z tych metryk jest u podstaw liniowo zależna od długości, która pod kątem przydatności niewiele różni się od liczby linii kodu. \\
+Łańcuch tych zależności sprowadza się do tego, że każda z tych metryk jest u podstaw liniowo zależna od długości, która pod kątem przydatności niewiele różni się od liczby linii kodu.
+
 Zebranie odpowiednich parametrów kodu i obliczenie tych metryk jest zatem inwestycją czasu, która w porównaniu z LOC jest nieopłacalna.
+
+\subsection{Złożoność cyklomatyczna i kognitywna}
+Złożoność cyklomatyczna to metryka służąca do oceny złożoności programów, ze szczególnym uwzględnieniem ich struktury sterowania. Wprowadził ją w 1976 roku Thomas McCabe jako narzędzie do mierzenia
+liczby niezależnych ścieżek w kodzie źródłowym. \cite[]{ComplexityMeasure}
+
+Często zapisywana jako $V(G)$, jest definiowana jako liczba niezależnych ścieżek w grafie przepływu sterowania programu.
+
+Można obliczyć ją na podstawie struktury grafu przepływu sterowania:
+$V(G) = E - N + 2P$,
+gdzie:
+\begin{itemize}
+    \item $E$ - liczba krawędzi w grafie
+    \item $N$ - liczba węzłów w grafie
+    \item $P$ - liczba połączonych komponentów grafu
+\end{itemize}
+Albo na podstawie liczby decyzji:
+$V(G) = D + 1$,
+gdzie:
+\begin{itemize}
+    \item $D$ - liczba węzłów decyzyjnych w grafie przepływu sterowania (instrukcje \texttt{if}, \texttt{switch}, pętle)
+\end{itemize}
+Złożoność cyklomatyczna nadaje się jednak do stosowania jedynie na poziomie pojedynczych metod oraz nie uwzględnia złożonych warunków logicznych.
+
+Ze względu na to że złożoność powstała w czasach mniej zaawansowanych języków programowania, obecnie w jej miejsce stosowana jest złożoność kognitywna. \cite[]{CognitiveComplexity}
+Złożoność kognitywna bierze pod uwagę również struktury związane z nowymi językami programowania, jak np. bloki \texttt{try/catch} czy wyrażenia lambda.
+
+Złożoność kognitywna jest bardzo dobrą metryką w procesie tworzenia oprogramowania. Pozwala na ocenę trudności testowania danych modułów lub monitorowanie kiedy już czas na refaktoryzację, ponieważ złożoność za bardzo urosła.
+
+Metryka ta nie nadaje się jednak zupełnie do pomiaru pracy, jako że skupia się w całości na poziomie skomplikowania kodu źródłowego.

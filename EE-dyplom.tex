@@ -30,13 +30,13 @@
 \kierunek{Informatyka Stosowana}
 \specjalnosc{Inżynieria Oprogramowania}
 \title{Generowanie danych na potrzeby nauki metryk w inżynierii oprogramowania}
-% \engtitle{Generation od datasets for teaching metrics }
+\engtitle{Generation od datasets for teaching metrics in software engineering}
 \album{311338}
 \author{Jakub Łaba}
 \promotor{mgr. inż. Krzysztof Marek}
 \date{2024}
 % TODO uzupełnić dokładną datę
-\longdate{2077-07-27}
+\longdate{2024-04-29}
 
 \grantlicense{FALSE} % [TRUE|FALSE]
 
@@ -45,14 +45,54 @@
 % In case of thesis in English swap the order - English version goes first.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \streszczeniepracy{
-TODO po napisaniu reszty pracy
+Praca "Generowanie danych na potrzeby nauki metryk w inżynierii oprogramowania" ma na celu opracowanie rozwiązania, umożliwiającego symulację projektów na plaformie Jira. Aplikacja
+stworzona w ramach pracy pozwala na generowanie danych, które inaczej mogłyby być ciężko dostępne, w celu nauki i doskonalenia umiejętności analizy metryk w projektach informatycznych. Takie podejście
+umożliwia zespołom i osobom odpowiedzialnym za zarządzanie projektami zdobywanie doświadczenia w analizie metryk inżynierii oprogramowania bez konieczności pracy z prawdziwymi danymi, które mogą
+być poufne lub po prostu trudne do zdobycia.
+
+Na początku pracy przedstawiony jest wachlarz metryk stosowanych w inżynierii oprogramowania: metryki statyczne oraz metryki stosowane w metodykach Scrum, Kanban oraz modelu COCOMO. Wybór metryk
+Kanbanowych jako podstawy projektu jest kluczowy, ponieważ mają one szerokie zastosowanie w rzeczywistych projektach informatycznych, pomagając w zrozumieniu przepływów zadań i identyfikacji wąskich gardeł.
+
+Dalsza część pracy obejmuje przegląd różnych platform do zarządzania projektami, takich jak Jira, YouTrack, Azure DevOps, Asana oraz Businessmap (wcześniej Kanbanize). Spośród platform dokładniej analizowane
+są Jira oraz YouTrack, a następnie na podstawie tej analizy uzasadniony jest wybór Jiry jako platformy, o którą oparte jest rozwiązanie.
+
+Kolejna część pracy opisuje proces implementacji, rozpoczynając od analizy struktury danych w projektach na Jirze, na podstawie dokumentacji oraz technik reverse-engineering,
+następnie opisując zastosowane rozwiązania, napotkane problemy, oraz funkcjonalności których nie udało się w pełni zrealizować.
+
+Aplikacja agilemaster jest implementowana w języku Rust jako program CLI, który umożliwia generowanie przykładowych danych projektów w formie plików kompatibilnych z narzędziem do importu danych na Jirę. Dane wygenerowane
+w ten sposób mogą być używane do celów dydaktycznych, pozwalając osobom odpowiedzialnym za zarządzenie projektami nauczyć się jak analizować metryki, testować różne scenariusze i doskonalić swoje umiejętności w
+zakresie interpretacji danych projektowych.
+
+W podsumowaniu pracy omówione są korzyści wynikające z oferowanego rozwiązania. Dzięki narzędziu agilemaster użytkownicy mogą eksperymentować z danymi projektów przy minimalnej konfiguracji oraz w kontrolowanym środowisku bez ryzyka
+manipulacji prawdziwymi danymi. W ten sposób aplikacja stanowi cenne narzędzie edukacyjne, które może wspierać szkolenia i rozwój umiejętności w zakresie zarządzania projektami.
+
+Na końcu pracy omawiane są potencjalne kierunki dalszego rozwoju pracy, takie jak integracja z większą ilością platform lub zaawansowane ustawienia parametrów generowania danych.
 } % koniec streszczenia
 \slowakluczowe{Kanban, Jira, Rust}
 
-% \thesisabstract{
-% TODO po napisaniu reszty pracy
-% } % end of abstract
-% \thesiskeywords{X, Y, Z}
+\thesisabstract{
+The thesis "Generation of datasets for teaching metrics in software engineering" aims to develop a solution for simulating projects on the Jira platform. Application created as a part of the thesis
+allows for generating datasets which could be otherwise difficult to obtain, for the purposes of learning and honing skills in analysis of software engineering metrics. This approach enables
+teams and project management personnel to gain experience in analyzing metrics without having to work with real data, which may be confidential or simply hard to obtain.
+
+The thesis begins with overview of an array of metrics used in software engineering: static metrics and those applied in methodologies like Scrum, Kanban, and the COCOMO model. Choice of Kanban metrics
+as the foundation for the project is crucial as they find wide application in real-worlds modern software projects, providing toolkit needed to understand workflows and identify bottlenecks.
+
+The next section of the thesis reveiws different project management platforms, such as Jira, YouTrack, Azure DevOps, Asana and Businessmap (formerly Kanbanize). Among these platforms, Jira and YouTrack make the cut
+for closer analysis, with the analysis leading to the eventual choice of Jira as the platform to base the solution on.
+
+The following part describes the implementation process, starting with analysis of structure in Jira projects, based on documentation and resorting to reverse-engineering techniques. It then discusses applied solutions,
+encountered challenges, and features that could not be fully realized.
+
+The agilemaster application is implemented in Rust as a CLI program, allowing users to generate sample project data materialized as files compatible with Jira's import wizard. The generated data can be used for educational
+purposes, enabling project management personnel to learn how to analyze metrics, test various scenarios and hone their project data analysis and interpretation skills.
+
+Summary of the thesis dives into the benefits of the proposed solution. With agilemaster, users can experiment with project data with minimal setup in a controlled environment, without risking interfering with real data. This
+makes the application a valuable educational tool that can support training and skill development in project management.
+
+Final part of the thesis explores ideas for further development, such as integration with more platforms or advanced configuration of data generation parameters.
+} % end of abstract
+\thesiskeywords{Kanban, Jira, Rust}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tu zaczyna się dokument
@@ -81,6 +121,9 @@ TODO po napisaniu reszty pracy
     % Spis tabel
     %\listoftables
     % Załączniki (plik appendices.tex)
-    %\easyappendices
+    % \easyappendices
+    \appendix
+    \section*{Repozytorium z projektem}
+    \href{https://github.com/jakublaba/agilemaster}{https://github.com/jakublaba/agilemaster}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

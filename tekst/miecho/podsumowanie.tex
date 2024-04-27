@@ -1,25 +1,17 @@
-W pracy została podjęta analiza szeregu metryk pod kątem ich zastosowania w kontekście pomiaru pracy zespołu.
-Przeprowadzono przegląd platform do zarządzania projektami, dalej dokonując bardziej szczegółowej analizy Jiry oraz YouTracka pod kątem
-metryk metodyki Kanban.
-Następnie przeprowadzana została analiza struktury danych projektu i zadań na podstawie dokumentacji oraz technik reverse-engineering, oraz zaimplementowane rozwiązanie
-pozwalające na generowanie przykładowych danych, wybierając czas trwania projektu oraz konfigurując dostępne w projekcie statusy.
-Dane uzyskane w ten sposób pozwoliły na wypełnienie projektu danymi oraz zapewnienie chronologii w historii zadań.
+Celem pracy "Generowanie danych na potrzeby nauki metryk w inżynierii oprogramowania" było stworzenie rozwiązania umożliwiającego symulację projektów z użyciem popularnych platform w kontrolowanym środowisku. Dzięki temu
+zespoły oraz osoby uczące się mogłyby doskonalić umiejętność analizy i interpretacji metryk bez konieczności pracy w rzeczywistymi danymi, które mogą być poufne lub po prostu trudne do zdobycia. W rezultacie powstała aplikacja
+w formie programu CLI, umożliwiająca generowanie danych do symulacji projektów prowadzonych w metodyce Kanban na platformie Jira.
 
-Aplikacja agilemaster pozwala na szybkie wypełnianie projektów danymi, wymagając przy tym minimalnej konfiguracji. Dzięki temu dla celów dydaktycznych można w zaledwie kilka sekund wygenerować
-zestawy danych zawierające setki lub tysiące zadań do kompleksowej analizy. Zminimalizowanie wysiłku związanego z przygotowywaniem ćwiczeniowych zestawów danych bezpośrednio w środowisku
-mającym szerokie zastosowanie komercyjne pozwala na popularyzację bardzo wartościowej wiedzy z zakresu zarządzania projektami w metodykach zwinnych.
+Prace rozpoczęły się od analizy różnych metryk stosowanych stosowanych do pomiaru efektywności zespołów w kontekście inżynierii oprogramowania. Przeprowadzony został również przegląd platform do zarządzania projektami, ze szczególnym
+uwzględnieniem Jiry i YouTracka, skupiając się na metrykach związanych z metodyką Kanban.
 
-Niestety nie udało się osiągnąć integracji z narzędziami do generowania wykresów bezpośrednio w Jirze, z uwagi na brak wystarczającej dokumentacji.
-Z analizy danych eksportowanych z Jiry zakładałem, że opierają się one na niestandardowym polu "timespent", które opisuje ile razy zadanie znajdowało się w każdym ze statusów
-oraz ile łącznie spędziło w nim czasu. Po implementacji tego pola jednak nadal wszystkie zadania na wykresach były kategoryzowane jakby nadal znajdowały się w pierwszym statusie (w zależności
-od testowanych szablonów "To Do" lub "Backlog").
+Kolejnym krokiem była analiza struktury danych projektów i zadań, opierając się na dokumentacji oraz technikach reverse-engineering. To pozwoliło na zdefiniowanie podstawowych mechanizmów, kluczowych dla implementacji rozwiązania.
 
-\section*{Możliwości dalszej rozbudowy projektu}
-W obecnej formie aplikacja posiada jedynie podstawowe funkcjonalności, pozostawiając nadal wiele pola do rozwoju.
-Istotnym ulepszeniem byłaby wspomniana integracja z narzędziami do generowania wykresów wbudowanymi bezpośrednio w Jirę aby zwiększyć wygodę analizy generowanych danych.
-Wiele wartości dodałaby tutaj możliwość dokładniejszej kontroli nad parametrami generowania, aby móc tworzyć bardziej precyzyjne scenariusze do nauki, pozwalając np. na celowe generowanie projektów
-które postępują bardzo sprawnie lub wręcz przeciwnie. Do osiągnięcia takich rezultatów można by było wprowadzić kontrolę nad rozkładem zadań w różnych statusach -- konfigurując precyzyjne ilości lub
-ich proporcje do siebie nawzajem. Innym parametrem którego kontrolowanie pozwoliłoby zwiększyć atrakcyjność aplikacji jest możliwość manipulacji czasem trwania zadań lub czas ich przebywania w 
-poszczególnych statusach -- w sposób precyzjny, lub na podstawie wybranych rozkładów losowych.
-Jeśli chodzi o kompatybilność aplikacji z więcej niż jedną platformą, jest to poniekąd osiągnięte poprzez wybór Jiry, będącej najpopularniejszą z nich.
-Popularnością Jiry podyktowana jest możliwość importu projektów z niej w innych narzędziach, takich jak YouTrack czy Azure DevOps.
+Aplikacja agilemaster pozwala na szybkie generowanie danych projektowych przy minimalnej konfiguracji. Aplikacja umożliwia wybór okna czasowego w którym mają być generowane zadania oraz wprowadzenie dowolnych statusów zadań, co pozwala
+na elastyczność pod kątem scenariuszy lub wymagań projektów tworzonych z różnych szablonów lub według niestandardowych spersonalizowanych konfiguracji. Dzięki temu zestawy danych do kompleksowej analizy, składające się z setek bądź tysięcy
+zadań, są na wycięgnięcie ręki w przeciągu zaledwie kilku sekund.
+
+Rozwiązanie może być niezwykle wartościowe dla celów szkoleniowych, ponieważ umożliwia naukę w środowisku, które jest zgodne z rzeczywistymi warunkami komercyjnymi. Osoby uczące się analizy metryk i zarządzania projektami w metodykach
+zwinnych mogą teraz ćwiczyć i eksperymentować z różnymi scenariuszami, zyskując cenne doświadczenie.
+
+Poprzez dostarczenie praktycznego narzędzia, znacznie usprawniającego proces nauki analizy metryk, praca może przyczynić się do popularyzacji wiedzy niosącej za sobą znaczącą wartość biznesową.

@@ -1,6 +1,8 @@
 \section{Przegląd i wybór platform do analizy}
 Na rynku istnieje wiele platform oferujących narzędzia do zarządzania projektami. Do przeglądu zostały wybrane platformy umożliwiające realizację projektów w metodyce Kanban, z uwagi na wybrane we wcześniejszej
-części pracy metryki. Przegląd krótko charakteryzuje każdą z platform oraz skupia się na wyróżniających cechach oraz obecności darmowego planu.
+części pracy metryki.
+
+Przegląd krótko charakteryzuje każdą z platform oraz skupia się na wyróżniających cechach oraz obecności darmowego planu.
 \begin{itemize}
     \item \href{https://www.atlassian.com/software/jira}{Jira}
     \item \href{https://azure.microsoft.com/en-us/products/devops/}{Azure DevOps}
@@ -9,73 +11,108 @@ części pracy metryki. Przegląd krótko charakteryzuje każdą z platform oraz
     \item \href{https://businessmap.io/}{Businessmap (wcześniej Kanbanize)}
 \end{itemize}
 
-\subsection*{Jira}
+\subsection{Jira}
 \subsubsection*{Charakterystyka}
-Atlassian niewątpliwie jest największym graczem na rynku w tej kategorii. Jira najbardziej popularna jest wśród projektów IT, jednak wśród dostępnych szablonów projektów możemy zaobserować również takie
-kategorie jak "Marketing", "Human Resources" czy "Legal". Jira oferuje również integrację z innymi narzędziami Atlassian: Confluence, znajdujące zastosowanie m.in. w prowadzeniu i organizacji dokumentacji oraz
-Bitbucket, oferującego kontrolę wersji oraz narzędzia CI/CD.
+Rozwiązanie oferowane przez firmę Atlassian od lat jest jednym z najpopularniejszych narzędzi do zarządzania projektami, szczególnie w środowiskach IT. Oferuje szereg funkcji, które sprawiają że jest uniwersalnym
+narzędziem, umożliwiającym zarządzanie różnorodnymi projektami -- od oprogramowania i innych kategorii IT po zespoły biznesowe, marketingowe czy HR.
+
+Jira jest znana z elastyczności, pozwalając na dostosowywanie przepływów pracy, tworzenie automatyzacji oraz integracje z innymi narzędziami Atlassian, takimi jak Confluence i Bitbucket.
+
+Jira oferuje również wsparcie dla różnych metodyk zarządzania projektami, w tym Scrum i Kanban, co czyni ją odpowiednią zarówno dla projektów krótkoterminowych, jak i długoterminowych. Jej system śledzenia błędów i problemów (issue tracking)
+jest jednym z najbardziej rozbudowanych na rynku, a użytkownicy mogą tworzyć zaawansowane raporty, korzystając z wbudowanych narzędzi do analizy danych.
+
+Jira posiada również specjalny język zapytań -- Jira Query Language (JQL), pozwalający na bardzo zaawansowane funkcjonalności dotyczące wyszukiwania i filtrowania danych.
+JQL dokładniej opisywany jest w rozdziale implementacyjnym \ref{impl:jql}.
 \subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item Silne wsparcie dla metodyk zwinnych
-    \item Rozbudowane możliwości automatyzacji
-    \item Szeroka oferta gotowych wtyczek oraz wiele możliwości personalizacji we własnym zakresie
+    \item Silne wsparcie dla metodyk zwinnych, w tym Scrum i Kanban
+    \item Zaawansowane możliwości automatyzacji i dostosowywania przepływów pracy
+    \item Integracja z innymi narzędziami Atlassian, co umożliwia łatwe zarządzanie dokumentacją i kontrolę wersji.
+    \item JQL
 \end{itemize}
 \subsection*{Darmowy Plan}
-Jira posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+Jira oferuje darmowy plan dla małych zespołów i użytku indywidualnego. W darmowym planie istnieją ograniczenia dotyczące liczby użytkowników i projektów, ale jest to wystarczające dla mniejszych zespołów, którzy chcą wypróbować platformę lub zarządzać niewielką liczbą projektów.
 
-\subsection*{Azure DevOps}
+\subsection{Azure DevOps}
 \subsubsection*{Charakterystyka}
-Microsoft oferuje zestaw narzędzi do zarządzania projektami, kontrolą wersji, procesami CI/CD oraz monitorowania. Azure DevOps został zaprojektowany z myślą o integracji z platformą Azure, oferującej
-szeroki wachlarz różnych usług chmurowych. 
+Azure DevOps to produkt firmy Microsoft, będący częścią większego ekosystemu usług Azure.
+
+Platforma ta została stworzona z myślą o zespołach technicznych i oferuje zestaw narzędzi do zarządzania projektami, kontroli wersji, CI/CD oraz monitorowania procesów. Azure DevOps jest zaprojektowany do integracji
+z innymi usługami Azure, co pozwala na tworzenie kompleksowych rozwiązań chmurowych.
+
+Azure DevOps skupia się na dostarczaniu narzędzi dla zespołów programistycznych umożliwiając tworzenie zautomatyzowanych przepływów pracy, śledzenia zadań i zarządzania repozytoriami kodu. Dzięki integracji z Visual Studio,
+platforma umożliwia programistom płynne przechodzenie między różnymi etapami procesu tworzenia oprogramowania.
 \subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item Silna orientacja na zespoły techniczne poprzez integrację CI/CD oraz kontroli wersji bez dodatkowych narzędzi
-    \item Mocne osadzenie w Microsoftowym ekosystemie -- nacisk na platformę Azure oraz integracja z Visual Studio
+    \item Silna orientacja na zespoły techniczne, z naciskiem na kontrolę wersji i CI/CD
+    \item Integracja z platformą Azure i narzędziami Microsoft, takimi jak Visual Studio
+    \item Możliwość zarządzania całym procesem tworzenia oprogramowania, od programowania po wdrażanie i monitorowanie
 \end{itemize}
 \subsection*{Darmowy Plan}
-Azure DevOps posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+Azure DevOps oferuje darmowy plan dla małych zespołów i użytku indywidualnego. Darmowy plan obejmuje ograniczenia dotyczące liczby użytkowników, ale zapewnia dostęp do większości funkcji platformy, co czyni go atrakcyjnym 
+dla małych zespołów i projektów testowych.
 
-\subsection*{YouTrack}
+\subsection{YouTrack}
 \subsubsection*{Charakterystyka}
-Rozwiązanie od JetBrains w wielu aspektach jest bardzo podobne do Jiry -- również stawia na elastyczność poprzez rozbudowane możliwości personalizacji oraz koncentruje się na metodykach zwinnych.
-YouTrack jest nieco mniej dojrzałym systemem, a więc nie posiada tak rozbudowanych funkcjonalności jak Jira. YouTrack nadrabia te braki poprzez koncentrację na produktywności poprzez przejrzystość
-interfejsu i optymalizację silnika wyszukiwań, co pozwala na bardzo szybkie wyszukiwane konkretnych zadań. JetBrains wykorzystuje również swoją silną pozycję na rynku zintegrowanych środowisk programistycznych,
-oferując integrację YouTracka ze wszystkimi z nich.
+YouTrack to rozwiązanie od JetBrains, firmy znanej z szerokiej oferty zintegrowanych środowisk programistycznych (IDE). Platforma ta jest zaprojektowana z myślą o prostocie i elastyczności, z naciskiem na produktywność. YouTrack oferuje
+funkcje, które ułatwiają zarządzanie projektami w metodyce Kanban, z możliwością szybkiego wyszukiwania zadań i elastycznego dostosowywania interfejsu.
+
+YouTrack wyróżnia się intuicyjnym interfejsem, który jest mniej skomplikowany niż inne platformy, co ułatwia nowym użytkownikom szybką naukę i rozpoczęcie pracy. Mimo prostoty, platforma zapewnia szereg zaawansowanych funkcji,
+takich jak automatyzacja, integracja z innymi narzędziami JetBrains i obsługa metodyk zwinnych.
 \subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item Silna orientacja na zespoły techniczne poprzez integrację z IDE oraz szybką nawigowalność platformy jedynie klawiaturą
-    \item Elastyczność podobna do Jiry przy dużo mniejszym stopniu skomplikowania platformy
+    \item Silna orientacja na zespoły techniczne dzięki integracji z popularnymi IDE JetBrains
+    \item Przejrzysty interfejs i szybka nawigacja platformy przy użyciu klawiatury
+    \item Możliwość dostosowywania przepływów pracy i łatwej automatyzacji zadań
 \end{itemize}
 \subsection*{Darmowy Plan}
-YouTrack posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+YouTrack oferuje darmowy plan dla małych zespołów i użytku indywidualnego. Darmowy plan pozwala na ograniczoną liczbę użytkowników i projektów, ale zawiera większość funkcji dostępnych w płatnych planach.
 
-\subsection*{Asana}
+\subsection{Asana}
 \subsubsection*{Charakterystyka}
-Pierwsze z omawianych narzędzi które nie koncentruje się na projektach informatycznych. Asana najbardziej popularna jest wśród zespołów biznesowych oraz kreatywnych, oferując
-przejrzysty i szybki do nauki interfejs oraz funkcjonalności wspierające współpracę: różne widoki projektów (w formie tablicy Kanban, osi czasu bądź kalendarza), raporty oraz możliwości łączenia
-projektów w większe struktury.
+Asana to narzędzie do zarządzania projektami, które skierowane jest przede wszystkim do zespołów biznesowych i kreatywnych. Oferuje przejrzysty i intuicyjny interfejs, który umożliwia zarządzanie projektami w różnych formach,
+takich jak tablice Kanban, osie czasu czy kalendarze. Asana kładzie nacisk na współpracę i umożliwia zespołom organizowanie pracy w sposób, który najlepiej odpowiada ich potrzebom.
+
+Asana jest elastyczna i pozwala użytkownikom dostosować przepływy pracy oraz tworzyć zaawansowane struktury projektów. Narzędzie to jest często używane przez zespoły kreatywne, marketingowe i biznesowe, ale znajduje również
+zastosowanie w innych obszarach, gdzie ważna jest przejrzystość i współpraca.
 \subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item Orientacja biznesowa
+    \item Wielokrotne widoki projektów (tablica Kanban, oś czasu, kalendarz), co pozwala na dostosowanie platformy do różnych potrzeb
+    \item Silne wsparcie dla współpracy między zespołami i integracji z innymi narzędziami
+    \item Możliwość łączenia projektów w większe struktury oraz tworzenia raportów
 \end{itemize}
 \subsection*{Darmowy Plan}
-Asana posiada darmowy plan dla użytku indywidualnego oraz małych zespołów.
+Asana oferuje darmowy plan dla małych zespołów i użytku indywidualnego. Darmowy plan ma ograniczenia dotyczące liczby użytkowników i projektów, ale zawiera podstawowe funkcje platformy
+i jest odpowiedni dla małych zespołów lub osób chcących przetestować Asanę.
 
-\subsection*{Businessmap (wcześniej Kanbanize)}
+\subsection{Businessmap (wcześniej Kanbanize)}
 \subsubsection*{Charakterystyka}
-Businessmap, jak wskazuje jego poprzednia nazwa, opiera się w całości o metodykę Kanban.
-Głównym elementem interfejsu są tutaj tablice, a cała platforma jest zaprojektowana wokół idei wizualizacji pracy oraz przepływu zadań.
+Businessmap, znane wcześniej jako Kanbanize, to platforma skoncentrowana na metodyce Kanban. Jest zaprojektowana z myślą i wizualizacji pracy i przepływu zadań. Centralnym elementem platformy są tablice Kanban, które umożliwiają
+śledzenie postępów zadań i zarządzanie przepływem pracy. Platforma ta oferuje również narzędzia do automatyzacji procesów oraz śledzenia aktywności zespołów.
+
+Businessmap jest mniej skomplikowane niż niektóre inne platformy do zarządzania projektami, ale zapewnia wszystkie niezbędne narzędzie do efektywnego zarządzania projektami w stylu Kanban. Dzięki swojej specjalizacji, platforma
+ta jest często wybierana przez zespoły chcące skupić się na metodyce Kanban bez konieczności korzystania z bardziej skomplikowanych narzędzi.
 \subsubsection*{Wyróżniające cechy}
 \begin{itemize}
-    \item Orientacja w całości na metodyce Kanban
+    \item Całkowita orientacja na metodyce Kanban, co czyni platformę intuicyjną dla zespołów, które preferują ten styl pracy
+    \item Narzędzia do wizualizacji pracy i przepływu zadań, które umożliwiają śledzenie postępów projektów w czasie rzeczywistym
+    \item Możliwość automatyzacji procesów i śledzenia efektywności pracy zespołów
 \end{itemize}
 \subsection*{Darmowy Plan}
-Businessmap nie posiada darmowego planu, oferuje jedynie darmowy okres próbny na 90 dni.
+Businessmap nie oferuje darmowego planu, jedynie 90-dniowy okres próbny.
 
-\subsection*{Podsumowanie i wybór platform do dalszej analizy}
-Pomimo dużej atrakcyjności Businessmap dla pracy, z uwagi na orientację na metodykę Kanban, brak planu darmowego niestety eliminuje tę platformę z dalszej analizy.
-Do dalszej analizy zostały wybrane Jira oraz YouTrack. Największe doświadczenie w korzystaniu z tych dwóch platform spośród wymienionych pozwoliło przeanalizować je bardziej rzetelnie
-niż byłoby to możliwe w przypadku Azure DevOps i Asany.
+\subsection*{Wybór platform do dalszej analizy}
+Wybierając platformy do dalszej analizy, brany były pod uwagę takie czynniki jak dostępność darmowych planów, doświadczenie z użytkowaniem oraz kompatybilność z metodyką Kanban. W związku z tym pomimo interfesującej orientacji
+Businessmap na Kanbana, platforma ta nie oferuje darmowego planu, co utrudnia jej pełną ocenę bez angażowania dodatkowych zasobów finansowych. Ponadto darmowy okres próbny Businessmap, choć długi (3 miesiące), w przypadku implementacji
+symulacji w oparciu o tę platformę, nadal wymagałby finalnej subskrypcji, co mogłoby być ograniczeniem dla niektórych użytkowników.
+
+Dlatego zdecydowałem skupić się na innych platformach, które są dostępne w darmowej wersji oraz mają uznaną reputację w dziedzinie zarządzania projektami: Jira oraz YouTrack. Obie platformy oferują darmowe plany, co pozwala na pełną ocenę
+funkcjonalności bez dodatkowych zobowiązań finansowych.
+
+Oprócz dostępności darmowych planów, wybór Jiry i YouTracka wynika również z doświadczenia, które już posiadam w korzystaniu z tych platform. Dzięki temu możliwe jest przeprowadzenie bardziej wnikliwej analizy, wykorzystując praktyczną
+wiedzę i podstawową znajomość ich funkcjonalności. To z kolei przekłada się na bardziej miarodajną ocenę wad i zalet każdej z nich oraz porównanie ich możliwości w kontekście zastosowania do symulacji projektów.
+
+W przypadku Azure DevOps oraz Asany, choć są to uznane platformy, to nie posiadam tak dobrego doświadczenia w ich używaniu, co mogłoby wpłynąć na dokładność analizy, przez co ich ocena mogłaby być mniej rzetelna od oceny Jiry i YouTracka.
 
 \section{Badanie możliwości REST API}
 W początkowej fazie pracy, projekt miał opierać się o rest api, udostępniane przez obie platformy. \cite{JiraApiDocumentation} \cite{YouTrackApiDocumentation}
@@ -96,41 +133,49 @@ W celu pobrania danych zadania należy wykonać zapytanie \texttt{GET} odpowiedn
 
 W przypadku Jiry odpowiedź zawiera kompletny zestaw danych -- poza podstawowym informacjami jak id, klucz czy projekt do którego należy zadanie, otrzymujemy również ogromną ilość
 danych związanych z historią zadania, możliwościami operacji na zadaniu, a nawet metadanych związanych z szablonami wykorzystanymi do tworzenia projektu lub użytych rozszerzeń.
+
 YouTrack domyślnie zwraca bardzo okrojony zestaw danych -- jedynie typ projektu. "Rest" api YouTracka nie spełnia założeń architektury REST \cite{RoyTFieldingRest}, strukturą i sposobem korzystania przypomina 
 bardziej takie rozwiązanie jak \href{https://graphql.org/}{GraphQL}. Wszystkie pola, które chcemy uzyskać w odpowiedzi musimy umieścić w parametrach zapytania.
+
 Przykładowo, aby uzyskać nazwę zadania oraz datę jego utworzenia, należy dodać parametr \texttt{?fields=name,created}. Jest to dobre rozwiązanie pod kątem optymalizacji liczby zapytań oraz zużycia zasobów, jednak
 w znaczący sposób komplikuje ono użytkowanie api, bardzo mocno przywiązując użytkownika do dokumentacji w celu odnalezienia informacji o dostępnych danych. W przypadku niekompletności dokumentacji reverse-engineering jest niemożliwy.
+
 Dodatkową wadą YouTracka w porównaniu do Jiry była niemożliwość identyfikacji zadań w zapytaniach po ich kluczach. Konieczne było uzyskanie ich id, co można było osiągnąć de facto tylko przez każdorazowe dodatkowe zapytanie o projekt z listą zadań, w której z kolei
 również trzeba było sprecyzować aby zwrócić ich id w parametrach zapytania. Już ta jedna różnica na starcie zasadniczo przechyliła szalę na korzyść Jiry.
 
 Najistotniejsze z punktu widzenia projektu były tutaj dane związane z historią zadań, konkretnie historią przejść pomiędzy statusami.
 Informacje potrzebne do realizacji projektu to przede wszystkim daty -- rozpoczęcia i zakończenia zadania (jeżeli zostało już zakończone), oraz wszystkich przejść pomiędzy statusami, z informacją
 z jakiego do jakiego statusu przeszło w danym momencie. Jedyne dane z tego zakresu jakie można było znaleźć w odpowiedzi to daty utworzenia zadania i jego ostatniej aktualizacji.
+
 W przypadku obu serwisów dokumentacja api nie opisuje danych stricte związanych z taką historią, jedynie szczątkowe dane takie jak data utworzenia, zamknięcia czy ostatniej aktualizacji (tj. dowolnej operacji związanej z konkretnym zadaniem).
 Przyjmując uproszczenie poprzez postawienie znaku równości pomiędzy datą utworzenia zadania i datą jego rozpoczęcia, nadal nie można by przeanalizować efektywności przepływu, a analiza reszty metryk byłaby dość przybliżona.
 Moment utworzenia zadania nie jest jednoznaczny z rozpoczęciem pracy nad nim, ponieważ po utworzeniu nadal może ono czekać przez pewien czas w backlogu zanim osiągnie punkt zobowiązania.
-Utworzenie zadania bez statusu nie jest możliwe w graficznym interfejsie żadnej z platform, jednak da się to zrobić w inny sposób, co zostanie opisane w dalszej części pracy.
 
 W celu utworzenie zadania należy wykonać zapytanie \texttt{POST} odpowiednio na adres:
 \begin{itemize}
     \item \texttt{https://[instancja jiry]/rest/api/2/issues} -- Jira
     \item \texttt{https://[instancja youtracka]/api/issues} -- YouTrack
 \end{itemize}
-W przypadku pomyślnego utworzenia zadania, api obu platform zwraca w odpowiedzi datę utworzenia zadania.
-Jira korzysta ze standardu ISO 8601, natomiast YouTrack z formatu Unix Time \cite{UnixProgrammersManual}.
+W przypadku pomyślnego utworzenia zadania, api obu platform zwraca w odpowiedzi datę utworzenia zadania. Jira korzysta ze standardu ISO 8601, natomiast YouTrack z formatu Unix Time \cite{UnixProgrammersManual}.
+
 Dokumentacje obu platform nie wspominają możliwości ustawienia tego pola. W przypadku Jiry próba kończy się odpowiedzią \texttt{400 Bad Request}, a YouTrack po prostu po cichu ignoruje tę daną
-w ciele zapytania.\\
+w ciele zapytania.
+
 Na tym etapie praca nad projektem została mocno spowolniona, ponieważ żadne z api nie udostępnia ani wszystkich potrzebnych danych do kompletnej analizy metryk, ani nie pozwala nawet ich ręcznie wprowadzić -- daty każdej operacji
 są automatycznie nadawane przez serwer i api nie pozwala w żaden sposób na obejście tego mechanizmu.
 
 \section{Podsumowanie i wybór platformy do implementacji rozwiązania}
 W związku z brakiem potrzebnych do realizacji projektu funkcjonalności w rest api obydwu platform, konieczne było poszukiwanie alternatywnego rozwiązania.
 YouTrack nie oferuje tutaj żadnych specjalnych funkcjonalności, natomiast Jira posiada swój własny język do tworzenia zapytań -- JQL (Jira Query Language). \cite{YouTrackSearch} \cite{JiraJQL}
+
 Na tym etapie projekt skupił się w całości na platformie Jira. Zapoznanie się z podstawami JQL było inwestycją czasu, która zwróciła się z nawiązką, szczególnie kiedy znalazłem również bibliotekę \href{https://pypi.org/project/jiraone/}{jiraone} do języka Python,
 która pozwala na eksport danych uzyskanych za pomocą JQL do plików \texttt{.json}. Skrypt do takiego eksportu danych zdecydowanie przyspieszył ich zdobywanie, oraz uprościł przechowywanie ich do późniejszej analizy.
+
 Dane zdobyte za pomocą JQL okazały się bardziej kompletne -- tutaj już można było odnaleźć informacje o historii poszczególnych zadań. Analiza danych pozyskana w ten sposób była również prostsza, z uwagi na możliwość nałożenia filtrów i zawężenia ich
-jedynie do tych istotnych na dany moment.\\
+jedynie do tych istotnych na dany moment.
+
 Po dalszych badaniach udało znaleźć się alternatywny sposób wypełniania projektów zadaniami -- narzędzie do migracji danych z zewnętrznego źródła do Jiry. \cite{JiraImportExport}
 Jira pozwala importować dane z różnych źródeł, ale szczególną uwagę przykuły pliki \texttt{.csv} oraz \texttt{.json} ze względu na prostotę.
+
 Dokumentacja importu z obu formatów okazała się dość wybrakowana pod kątem danych istotnych dla projektu. Jednak jako że eksport za pomocą JQL zwracał format JSON, reverse-engineering za pomocą wcześniej napisanych skryptów w Pythonie nie był
 żadnym problemem.
